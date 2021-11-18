@@ -23,8 +23,8 @@ app.get('/health', (req, res) => {
     res.sendStatus(200)
 })
 
-app.get('/api/weather/forecast', async (req, res) => {
-    const { data } = await axios.get(`${WEATHER_API_BASE_URL}/forecast.json?key=${process.env.WEATHER_API_KEY}&q=${req.ip}`)
+app.get('/forecast', async (req, res) => {
+    const { data } = await axios.get(`${WEATHER_API_BASE_URL}/forecast.json?key=${process.env.WEATHER_API_KEY}&q=${req.ip}`);
     try {
         res.send(data)
     } catch (error) {
@@ -32,7 +32,10 @@ app.get('/api/weather/forecast', async (req, res) => {
     }
 })
 
+app.get('/', (req,res) => {
+    res.sendFile(path.join(__dirname,'..','dist','index.html'))
+})
+app.use('/assets', express.static(path.join(__dirname,'..','dist','assets')))
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 4000
 app.listen(PORT, console.log(`server listening on port ${PORT}..`))
-
