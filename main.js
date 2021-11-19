@@ -6,14 +6,14 @@ const currentDescription = document.getElementById('current-description');
 const forecastContainer = document.getElementById('forecast-container')
 
 
-function appendDataToCurrentCard(location, temperature, icon, description) {
-  currentLocation.append(location)
-  currentTemp.append(temperature)
-  currentIcon.src = icon
-  currentDescription.append(description)
+function appendDataToCurrentCard(weatherData) {
+  currentLocation.append(weatherData.location)
+  currentTemp.append(weatherData.temp)
+  currentIcon.src = weatherData.icon
+  currentDescription.append(weatherData.description)
 }
 
-function createForecastCards(weekday, temperature, icon, description) {
+function createForecastCards(weekday,temperature,icon,description) {
   const h1 = document.createElement('h1')
   h1.append(weekday)
   const h2 = document.createElement('h2')
@@ -38,25 +38,34 @@ function createForecastCards(weekday, temperature, icon, description) {
     const res = await fetch(`${BASE_URL}/forecast`)
     const json = await res.json();
 
+    const weatherData = {
+      location: json.location.name,
+      temp: json.current.temp_f,
+      icon: json.current.condition.icon,
+      description: json.current.condition.text
+    }
 
-    const location = json.location.name
-    const temp = json.current.temp_f
-    const icon = json.current.condition.icon
-    const description = json.current.condition.text
-    appendDataToCurrentCard(location, temp, icon, description)
+    appendDataToCurrentCard(weatherData)
+    console.log(json.current.temp_f)
+    const daysOfTheWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    const weatherImages = {
+      'Sunny': './weather-images/Sunny.svg',
+      'Cloudy': './weather-images/Cloudy.svg',
+      'Clear': './weather-images/Moon.svg'
+    }
+    json.forecast.forecastday.forEach(e => {
+      const date = new Date(e.date_epoch * 1000)
 
-
-    const forecast = json.forecast.forecastday.forEach(e => {
-      const day = 'hello'
+      const day = daysOfTheWeek[date.getDay()]
       const temp = e.day.avgtemp_f
-      const icon = e.day.condition.icon
+      let icon
       const description = e.day.condition.text
+
+      if (weatherImages[description]) icon = weatherImages[description]
 
       createForecastCards(day, temp, icon, description)
     })
 
-    console.log(json)
-    console.log(forecast)
   } catch (error) {
     console.error(error)
   }
