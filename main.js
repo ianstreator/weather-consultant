@@ -6,14 +6,14 @@ const currentDescription = document.getElementById('current-description');
 const forecastContainer = document.getElementById('forecast-container')
 
 
-function appendDataToCurrentCard(weatherData) {
+function appendDataToCurrentCard(weatherData,icon) {
   currentLocation.append(weatherData.location)
   currentTemp.append(weatherData.temp)
-  currentIcon.src = weatherData.icon
+  currentIcon.src = icon
   currentDescription.append(weatherData.description)
 }
 
-function createForecastCards(weekday,temperature,icon,description) {
+function createForecastCards(weekday, temperature, icon, description) {
   const h1 = document.createElement('h1')
   h1.append(weekday)
   const h2 = document.createElement('h2')
@@ -37,22 +37,24 @@ function createForecastCards(weekday,temperature,icon,description) {
   try {
     const res = await fetch(`${BASE_URL}/forecast`)
     const json = await res.json();
-
-    const weatherData = {
-      location: json.location.name,
-      temp: json.current.temp_f,
-      icon: json.current.condition.icon,
-      description: json.current.condition.text
-    }
-
-    appendDataToCurrentCard(weatherData)
-    console.log(json.current.temp_f)
-    const daysOfTheWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
     const weatherImages = {
       'Sunny': './weather-images/Sunny.svg',
       'Cloudy': './weather-images/Cloudy.svg',
       'Clear': './weather-images/Moon.svg'
     }
+    const weatherData = {
+      location: json.location.name,
+      temp: json.current.temp_f,
+      description: json.current.condition.text,
+      
+    }
+    const icon = weatherImages[weatherData.description]
+    console.log(icon)
+
+    appendDataToCurrentCard(weatherData,icon)
+    console.log(json.current.temp_f)
+    const daysOfTheWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    
     json.forecast.forecastday.forEach(e => {
       const date = new Date(e.date_epoch * 1000)
 
