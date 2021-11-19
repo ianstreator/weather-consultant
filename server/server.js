@@ -24,13 +24,21 @@ app.get('/health', (req, res) => {
 })
 
 app.get('/forecast', async (req, res) => {
-    const { data } = await axios.get(`${WEATHER_API_BASE_URL}/forecast.json?key=${process.env.WEATHER_API_KEY}&q=${req.ip}`);
+    const { data } = await axios.get(`${WEATHER_API_BASE_URL}/forecast.json?key=${process.env.WEATHER_API_KEY}&q=${req.ip}&days=14`);
     try {
         res.send(data)
     } catch (error) {
         res.status(500).send({ message: error })
     }
 })
+// app.get('/forecast', async (req, res) => {
+//     const { data } = await axios.get(`https://api.weatherstack.com/current?access_key=${process.env.API_KEY}&query=Chicago`);
+//     try {
+//         res.send(data)
+//     } catch (error) {
+//         res.status(500).send({ message: error })
+//     }
+// })
 
 app.get('/', (req,res) => {
     res.sendFile(path.join(__dirname,'..','dist','index.html'))
