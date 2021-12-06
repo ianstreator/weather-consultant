@@ -1,8 +1,8 @@
 :root {
   --dark-background-color: #333;
   --dark-text-color: #DEDEDE;
-  --dark-card-color: #525B68;
-  --dark-card-forecast-color: #0000005d;
+  --dark-card-color: #304561e8;
+  --dark-card-forecast-color: #00000063;
  
   --light-background-color: #FFFFFF;
   --light-text-color: #0000;
@@ -64,7 +64,6 @@ main {
     h2 {
       font-size: 8rem;
       margin: auto;
-
     }
     img {
       width:200px;
@@ -73,12 +72,11 @@ main {
     p {
       font-size: 4rem;
       margin: auto;
-
     }
   }
   .forecast-container {
     background-color: var(--card-forecast-color);
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(30px);
     width: 1200px;
     min-width: 600px;
     height: 750px;
@@ -100,21 +98,20 @@ main {
       display: flex;
       flex-direction: row;
       justify-content: center;
-      .row {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-      }
       .weekday {
         background-color: var(--card-color);
-        min-width: 150px;
-        height: 250px;
+        width: 225px;
+        min-width: 225px;
+
+        height: 375px;
+        min-height: 375px;
         margin: 1rem;
         display: flex;
         flex-direction: column;
         align-items: center;
         border-radius: 15px;
         box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+        padding: 2rem;
         h1 {
           font-size: 2rem;
           margin: auto;
@@ -131,6 +128,7 @@ main {
         p {
           font-size: 2rem;
           margin: auto;
+          text-align: center;
     
         }
       }
@@ -150,10 +148,15 @@ footer {
   backdrop-filter: blur(50px);
   p {
     margin: 1rem;
+    text-align: center;
+    & a {
+      color: rgb(255, 180, 130);
+      text-decoration: none;
+    }
   }
 }
 
-@media only screen and (max-width: 1350px) {
+@media only screen and (max-width: 1600px) {
   main {
     flex-grow: 1;
     display: flex;
@@ -191,7 +194,7 @@ footer {
     .forecast-container {
       background-color: var(--card-forecast-color);
       width: 1200px;
-      min-width: 500px;
+      min-width: 550px;
       height: 750px;
       margin: 3rem;
       margin-left: auto;
@@ -201,8 +204,8 @@ footer {
       flex-direction: column;
       align-items: center;
       h1 {
-        font-size: 3.5rem;
-        margin-top: 1rem;
+        font-size: 4rem;
+        margin-top: 2rem;
       }
       .forecast-card-container {
         margin: auto;
@@ -214,11 +217,6 @@ footer {
         overflow-y: scroll;
         &::-webkit-scrollbar {
           display: none;
-        }
-        .row {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
         }
         .weekday {
           background-color: var(--card-color);
@@ -237,7 +235,129 @@ footer {
   }
 }
 
-@media only screen and (max-width: 1000px) {
+// @media only screen and (max-width: 1150px) {
+//   body {
+//     background-size: cover;
+//     background-repeat: repeat-y;
+//   }
+//   main {
+//     flex-grow: 1;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     padding: 1rem;
+//     .current {
+//       background-color: var(--card-color);
+//       width: 500px;
+//       min-width: 300px;
+//       height: 750px;
+//       margin: 3rem;
+//       display: flex;
+//       flex-direction: column;
+//       align-items: center;
+//       border-radius: 15px;
+//       box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+//       h1 {
+//         font-size: 4rem;
+//         margin: auto;
+//       }
+//       h2 {
+//         font-size: 8rem;
+//         margin: auto;
+  
+//       }
+//       img {
+//         width: 200px;
+//         margin: auto;
+//       }
+//       p {
+//         font-size: 4rem;
+//         margin: auto;
+  
+//       }
+//     }
+//     .forecast-container {
+//       background-color: var(--card-forecast-color);
+//       width: 500px;
+//       min-width: 300px;
+//       height: 750px;
+//       margin: 3rem;
+//       border-radius: 15px;
+//       box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+//       display: flex;
+//       flex-direction: column;
+//       align-items: center;
+//       h1 {
+//         font-size: 3.5rem;
+//         margin-top: 1rem;
+//       }
+//       .forecast-card-container {
+//         margin: auto;
+//         width: 90%;
+//         height: 40rem;
+//         display: flex;
+//         flex-direction: column;
+//         overflow-y: scroll;
+//         &::-webkit-scrollbar {
+//           display: none;
+//         }
+//         .weekday {
+//           background-color: var(--card-color);
+//           min-width: 200px;
+//           height: 300px;
+//           margin-bottom: 2rem;
+//           margin-top: 2rem;
+//           padding: 1rem;
+//           display: flex;
+//           flex-direction: column;
+//           align-items: center;
+//           border-radius: 15px;
+//           box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+//           h1 {
+//             font-size: 2rem;
+//             margin: auto;
+//           }
+//           h2 {
+//             font-size: 4rem;
+//             margin: auto;
+      
+//           }
+//           img {
+//             width: 100px;
+//             margin: auto;
+//           }
+//           p {
+//             font-size: 2rem;
+//             margin: auto;
+      
+//           }
+//         }
+//       }
+//     }
+//   }
+  
+//   footer {
+//     height: 4rem;
+//     width: 100%;
+//     padding-top: 2rem;
+//     padding-bottom: 2rem;
+
+//     background-color: var(--card-forecast-color);
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+//     p {
+//       margin: 1rem;
+//     }
+//   }
+// }
+
+@media only screen and (max-width: 600px) {
+  body {
+    background-size: cover;
+    background-repeat: repeat-y;
+  }
   main {
     flex-grow: 1;
     display: flex;
@@ -246,93 +366,91 @@ footer {
     padding: 1rem;
     .current {
       background-color: var(--card-color);
-      width: 500px;
-      min-width: 300px;
-      height: 750px;
-      margin: 3rem;
+      width: 60%;
+      min-width: 275px;
+      height: 100%;
+      min-height: 250px;
+      margin: .5em;
       display: flex;
       flex-direction: column;
       align-items: center;
       border-radius: 15px;
       box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
       h1 {
-        font-size: 4rem;
+        font-size: 2rem;
         margin: auto;
       }
       h2 {
-        font-size: 8rem;
+        font-size: 4rem;
         margin: auto;
   
       }
       img {
-        width: 200px;
+        width: 100px;
         margin: auto;
       }
       p {
-        font-size: 4rem;
+        font-size: 2rem;
         margin: auto;
   
       }
     }
     .forecast-container {
       background-color: var(--card-forecast-color);
-      width: 500px;
-      min-width: 300px;
-      height: 750px;
-      margin: 3rem;
+      width: 80%;
+      min-width: 275px;
+      height: 100%;
+      min-height: 200px;
+      margin: .5em;
       border-radius: 15px;
       box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
       display: flex;
       flex-direction: column;
       align-items: center;
       h1 {
-        font-size: 3.5rem;
-        margin-top: 1rem;
+        font-size: 2rem;
+        margin: .25rem;
       }
       .forecast-card-container {
-        margin: auto;
-        width: 90%;
-        height: 40rem;
+        margin: unset;
+        width: 80%;
+        height: 20rem;
         display: flex;
         flex-direction: column;
         overflow-y: scroll;
         &::-webkit-scrollbar {
           display: none;
         }
-        .row {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-        }
         .weekday {
           background-color: var(--card-color);
-          min-width: 200px;
-          height: auto;
-          margin-bottom: 2rem;
-          margin-top: 2rem;
-          padding: 1rem;
+          min-width: 175px;
+          width: 50%;
+          height: 15rem;
+          min-height: 15rem;
+          margin-bottom: .5rem;
+          margin-top: .5rem;
+          padding: .25rem;
           display: flex;
           flex-direction: column;
           align-items: center;
           border-radius: 15px;
           box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
           h1 {
-            font-size: 2rem;
-            margin: auto;
+            font-size: 1.5rem;
+            margin: .5em;
           }
           h2 {
-            font-size: 4rem;
-            margin: auto;
+            font-size: 2rem;
+            margin: .25em;
       
           }
           img {
-            width: 100px;
-            margin: auto;
+            width: 5rem;
+            margin: .5em;
           }
           p {
-            font-size: 2rem;
-            margin: auto;
-      
+            font-size: 1rem;
+            margin: .5em;
           }
         }
       }
@@ -340,18 +458,20 @@ footer {
   }
   
   footer {
-    height: 4rem;
+    height: 3rem;
     width: 100%;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
 
     background-color: var(--card-forecast-color);
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    font-size: 12px;
     justify-content: center;
     align-items: center;
     p {
-      margin: 1rem;
+      margin: .5rem;
+      text-align: center;
     }
   }
 }

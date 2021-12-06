@@ -1,11 +1,4 @@
 import './style.scss'
-import images from './weather-images/index.js'
-const weatherImages = {
-  'Sunny': images.Sunny,
-  'Cloudy': images.Cloudy,
-  'Clear': images.Moon
-}
-
 
 const currentLocation = document.getElementById('current-location');
 const currentTemp = document.getElementById('current-temp');
@@ -52,26 +45,24 @@ function createForecastCards(weekday, temperature, icon, description) {
   }
   try {
     const res = await fetch(`${BASE_URL}/forecast`)
-    const [json,image] = await res.json();
-
-    console.log(json)
-    console.log(image)
-    const background = image.split(',')[16].split(' ')[1]
+    const [json, background] = await res.json();
     body.style.cssText = `background-image: url(${background})`
 
+    console.log(json)
+    console.log(background)
+
+
     const town = json.location.name
-    title.text = `${town}'s weather`
+    const region = json.location.region
+    title.text = `${town} ${region}`
     const icon = json.current.condition.icon
     faviconLink.href = icon
-    
+
     const weatherData = {
       location: json.location.name,
       temp: json.current.temp_f,
       description: json.current.condition.text,
     }
-    // const icon = weatherImages[weatherData.description]
-    const icons = Object.values(images)
-    // console.log(icons)
 
     appendDataToCurrentCard(weatherData, icon)
     const daysOfTheWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
@@ -82,7 +73,6 @@ function createForecastCards(weekday, temperature, icon, description) {
       const temp = e.day.avgtemp_f
       const description = e.day.condition.text
 
-      // if (weatherImages[description]) icon = weatherImages[description]
       icon = e.day.condition.icon
 
       createForecastCards(day, temp, icon, description)
@@ -92,4 +82,3 @@ function createForecastCards(weekday, temperature, icon, description) {
     console.error(error)
   }
 })();
-
