@@ -42,6 +42,8 @@ function createForecastCards(weekday, temperature, icon, description) {
   let BASE_URL = '';
   if (window.location.host.includes('localhost')) {
     BASE_URL = 'http://localhost:4000'
+  } else {
+    BASE_URL = 'https://my-local-weather-app.herokuapp.com'
   }
   try {
     const res = await fetch(`${BASE_URL}/forecast`)
