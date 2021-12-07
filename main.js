@@ -46,11 +46,10 @@ function createForecastCards(weekday, temperature, icon, description) {
   try {
     const res = await fetch(`${BASE_URL}/forecast`)
     const [json, background] = await res.json();
-    body.style.cssText = `background-image: url(${background})`
+    body.style.cssText = `background-image: url(${background});background-size: cover;`
 
     console.log(json)
     console.log(background)
-
 
     const town = json.location.name
     const region = json.location.region
