@@ -29,38 +29,27 @@ app.get("/health", (req, res) => {
 const imageSrcCache = {};
 app.get("/forecast", async (req, res) => {
   const { data: weatherData } = await axios.get(
-    `${WEATHER_API_BASE_URL}/forecast.json?key=${process.env.WEATHER_API_KEY}&q=98.228.23.0&days=14`
+    `${WEATHER_API_BASE_URL}/forecast.json?key=${process.env.WEATHER_API_KEY}&q=auto:ip&days=14`
   );
   const region = weatherData.location.tz_id.split("/")[1];
-  console.log(region);
-  console.log(imageSrcCache);
+ 
   if (!imageSrcCache[region]) {
-    const { data: image } = await axios.get(
+    const { data: imagesURL } = await axios.get(
       `https://unsplash.com/s/photos/${region}`
     );
-    const $ = cheerio.load(image);
+    const $ = cheerio.load(imagesURL);
     const imageSrcSet = $(".VQW0y").find(".YVj9w").attr("srcset");
     const background = imageSrcSet.split(",")[16].split(" ")[1];
     imageSrcCache[region] = background;
-    console.log(imageSrcCache[region]);
   }
 
-  const body = [weatherData, imageSrcCache[region]];
+  const body = {'json':weatherData, 'background':imageSrcCache[region]};
   try {
     res.send(body);
   } catch (error) {
     res.status(500).send({ message: error });
   }
 });
-
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "dist", "index.html"));
-});
-
-app.use(
-  "/assets",
-  express.static(path.join(__dirname, "..", "dist", "assets"))
-);
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, console.log(`server listening on port ${PORT}..`));
