@@ -1,4 +1,5 @@
 import './style.scss'
+import images from './images/images.js'
 
 const currentLocation = document.getElementById('current-location');
 const currentTemp = document.getElementById('current-temp');
@@ -8,6 +9,12 @@ const forecastContainer = document.getElementById('forecast-container');
 const body = document.querySelector('body');
 const title = document.querySelector('title');
 const faviconLink = document.querySelector('link');
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+}
 
 function appendDataToCurrentCard(weatherData, icon) {
   currentLocation.append(weatherData.location)
@@ -47,8 +54,13 @@ function createForecastCards(weekday, temperature, icon, description) {
   }
   try {
     const res = await fetch(`${BASE_URL}/forecast`)
-    const {json, background} = await res.json();
-    body.style.cssText = `background-image: url(${background});background-size: cover;`
+    let {json, background} = await res.json();
+    console.log(background)
+    const objectImageLookup = ['pig', 'frog', 'rhino', 'elephant', 'elephant2']
+    if (background === 'animals') background = images[objectImageLookup[getRandomInt(0,4)]];
+    // const [json, background] = await res.json();
+
+    body.style.cssText = `background-image: url(${background});`
     console.log(json)
     console.log(background)
 
