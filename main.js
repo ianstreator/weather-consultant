@@ -15,6 +15,7 @@ function getRandomInt(min, max) {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
 }
+const rand3 = () => getRandomInt(0,3);
 
 function appendDataToCurrentCard(weatherData, icon) {
   currentLocation.append(weatherData.location)
@@ -44,7 +45,6 @@ function createForecastCards(weekday, temperature, icon, description) {
 
   forecastContainer.append(card)
 }
-
 (async () => {
   let BASE_URL = '';
   if (window.location.host.includes('localhost')) {
@@ -55,14 +55,11 @@ function createForecastCards(weekday, temperature, icon, description) {
   try {
     const res = await fetch(`${BASE_URL}/forecast`)
     let {json, background} = await res.json();
-    console.log(background)
-    const objectImageLookup = ['pig', 'frog', 'rhino', 'elephant', 'elephant2']
-    if (background === 'animals') background = images[objectImageLookup[getRandomInt(0,4)]];
-    // const [json, background] = await res.json();
+    const objectImageLookup = ['frog', 'elephant', 'rhino']
+    console.log(background) 
+    if (background === 'defaults') background = images[objectImageLookup[rand3()]];
 
     body.style.cssText = `background-image: url(${background});`
-    console.log(json)
-    console.log(background)
 
     const town = json.location.name
     const region = json.location.region
