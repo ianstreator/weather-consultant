@@ -29,9 +29,10 @@ app.get("/health", (req, res) => {
 const imageSrcCache = {};
 let background
 app.get("/forecast", async (req, res) => {
-  const {data} = await axios.get(`https://ipgeolocation.abstractapi.com/v1/?api_key=${process.env.IP_API_KEY}`);
+  const { data : userIP } = await axios.get(`https://ipgeolocation.abstractapi.com/v1/?api_key=${process.env.IP_API_KEY}`);
+  console.log(userIP.ip_address)
   const { data: weatherData } = await axios.get(
-    `${WEATHER_API_BASE_URL}/forecast.json?key=${process.env.WEATHER_API_KEY}&q=${data.ip_address}&days=7`
+    `${WEATHER_API_BASE_URL}/forecast.json?key=${process.env.WEATHER_API_KEY}&q=${userIP.ip_address}&days=7`
   );
   const region = weatherData.location.tz_id.split("/")[1];
   if (!imageSrcCache[region]) {
@@ -39,8 +40,7 @@ app.get("/forecast", async (req, res) => {
       `https://unsplash.com/s/photos/${region}`
     );
     const $ = cheerio.load(imagesHTML);
-    console.log($(".VQW0y").find(".YVj9w").attr("srcset"))
-    const imageSrcSet = $(".VQW0y").find(".YVj9w").attr("srcset");
+    const imageSrcSet = $(".ripi6").find(".YVj9w").attr("srcset");
     if (imageSrcSet === undefined) {
       imageSrcCache[region] = 'defaults'
     } else {
