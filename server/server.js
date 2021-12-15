@@ -20,6 +20,7 @@ if (!isProd) {
 //     express.static(path.join(__dirname, "..", "dist", "assets"))
 //   );
 // }
+app.enable("trust proxy");
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "dist", "index.html"));
 });
@@ -37,9 +38,11 @@ app.get("/health", (req, res) => {
 const imageSrcCache = {};
 let background;
 app.get("/forecast", async (req, res) => {
+  let IP
+  isProd ? IP = req.ip : IP = 'auto:ip'
   try {
     const { data: weatherData } = await axios.get(
-      `${WEATHER_API_BASE_URL}/forecast.json?key=${process.env.WEATHER_API_KEY}&q=auto:ip&days=7`
+      `${WEATHER_API_BASE_URL}/forecast.json?key=${process.env.WEATHER_API_KEY}&q=${IP}&days=7`
     );
     const region = weatherData.location.tz_id.split("/")[1];
     if (!imageSrcCache[region]) {
