@@ -11,15 +11,23 @@ const isProd = process.env.NODE_ENV === "production";
 if (!isProd) {
   app.use(cors());
 }
-if (isProd) {
-  app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "dist", "index.html"));
-  });
-  app.use(
-    "/assets",
-    express.static(path.join(__dirname, "..", "dist", "assets"))
-  );
-}
+// if (isProd) {
+//   app.get("/", (req, res) => {
+//     res.sendFile(path.join(__dirname, "..", "dist", "index.html"));
+//   });
+//   app.use(
+//     "/assets",
+//     express.static(path.join(__dirname, "..", "dist", "assets"))
+//   );
+// }
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "dist", "index.html"));
+});
+
+app.use(
+  "/assets",
+  express.static(path.join(__dirname, "..", "dist", "assets"))
+);
 const WEATHER_API_BASE_URL = "http://api.weatherapi.com/v1";
 
 app.get("/health", (req, res) => {
@@ -55,15 +63,6 @@ app.get("/forecast", async (req, res) => {
     res.status(500).send({ message: error });
   }
 });
-
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "dist", "index.html"));
-});
-
-app.use(
-  "/assets",
-  express.static(path.join(__dirname, "..", "dist", "assets"))
-);
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, console.log(`server listening on port ${PORT}..`));
