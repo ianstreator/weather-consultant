@@ -38,7 +38,7 @@ const imageSrcCache = {};
 let background;
 app.get("/forecast", async (req, res) => {
   const { data: weatherData } = await axios.get(
-    `${WEATHER_API_BASE_URL}/forecast.json?key=${process.env.WEATHER_API_KEY}&q=auto:ip&days=7`
+    `${WEATHER_API_BASE_URL}/forecast.json?key=${process.env.WEATHER_API_KEY}&q=${req.ip}&days=7`
   );
   console.log(req.ip);
   const region = weatherData.location.tz_id.split("/")[1];
