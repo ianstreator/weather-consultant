@@ -10,13 +10,6 @@ const body = document.querySelector("body");
 const title = document.querySelector("title");
 const faviconLink = document.querySelector("link");
 
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
-}
-const rand3 = () => getRandomInt(0, 3);
-
 function appendDataToCurrentCard(weatherData, icon) {
   currentLocation.append(weatherData.location);
   currentTemp.append(weatherData.temp);
@@ -45,8 +38,18 @@ function createForecastCards(weekday, temperature, icon, description) {
 
   forecastContainer.append(card);
 }
+//.....asking user if the website can use their location....
+let location = {};
+async function getCoordinates() {
+  const pos = await new Promise((res, rej) => {
+    navigator.geolocation.getCurrentPosition(res, rej);
+  });
+  location.lat = pos.coords.latitude;
+  location.lon = pos.coords.longitude;
+}
 
 (async () => {
+  await getCoordinates();
   let BASE_URL = "";
   if (window.location.host.includes("localhost")) {
     BASE_URL = "http://localhost:4000";
@@ -55,41 +58,37 @@ function createForecastCards(weekday, temperature, icon, description) {
   }
 
   try {
-    navigator.geolocation.getCurrentPosition((position) => {
-      const lat = position.coords.latitude;
-      const lon = position.coords.longitude;
-      const location = { lat, lon };
-      fetch(`${BASE_URL}/location`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(location),
-      });
-    });
-
-    const res = await fetch(`${BASE_URL}/forecast`);
-
+    const options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(location),
+    };
+    const res = await fetch(`${BASE_URL}/forecast`, options);
     let { json, background } = await res.json();
-    const objectImageLookup = ["frog", "elephant", "rhino"];
 
-    if (background === "defaults")
-      background = images[objectImageLookup[rand3()]];
+    //....setting website background image........
+    if (background === "defaults") {
+      Math.random() < 0.5
+        ? (background = images.elephant)
+        : (background = images.frog);
+    }
     body.style.cssText = `background-image: url(${background});`;
-    console.log(json);
-    console.log(background);
 
+    //.....website title and favicon........
     const town = json.location.name;
     const region = json.location.region;
     title.text = `${town} ${region}`;
     const icon = json.current.condition.icon;
     faviconLink.href = icon;
 
+    //....data for current day card.....
     const weatherData = {
       location: json.location.name,
       temp: json.current.temp_f,
       description: json.current.condition.text,
     };
-
     appendDataToCurrentCard(weatherData, icon);
+
     const daysOfTheWeek = [
       "Monday",
       "Tuesday",
@@ -99,14 +98,13 @@ function createForecastCards(weekday, temperature, icon, description) {
       "Saturday",
       "Sunday",
     ];
+    //....data for forecast day cards.....
     json.forecast.forecastday.forEach((e) => {
-      let icon;
+      const icon = e.day.condition.icon;
       const date = new Date(e.date_epoch * 1000);
       const day = daysOfTheWeek[date.getDay()];
       const temp = e.day.avgtemp_f;
       const description = e.day.condition.text;
-
-      icon = e.day.condition.icon;
 
       createForecastCards(day, temp, icon, description);
     });
