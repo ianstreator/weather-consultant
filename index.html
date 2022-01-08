@@ -1,40 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Local Weather</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" >
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Local Weather</title>
-</head>
+  <body>
+    <main>
+      <div class="current-container">
+        <div class="main-info">
+          <img src="images/location.png" width="20px" alt="Location" />
+          <h1>Chicago</h1>
+          <img src="images/calendar.png" width="25px" alt="Date" />
+          <h1>1/8/22</h1>
+          <img src="images/clock.png" width="25px" alt="Time" />
+          <h1>2:35am</h1>
+        </div>
+        <div class="current-cards">
+          <div class="current">
+            <h1 id="current-location">Today</h1>
+            <h2 id="current-temp"></h2>
+            <img id="current-icon" />
+            <p id="current-description"></p>
+          </div>
+        </div>
+      </div>
 
-<body>
+      <div class="quote-container">
+        <h1 class="quote">
+          Look deep into nature, and then you will understand everything better.
+        </h1>
+        <h2 class="quote-author">-Albert Einstein</h2>
+      </div>
 
-  <main>
-
-    <div class="current">
-      <h1 id="current-location"></h1>
-      <h2 id="current-temp"></h2>
-      <img id="current-icon">
-      <p id="current-description"></p>
-    </div>
-
-    <div class="forecast-container">
-      <h1>Forecast</h1>
       <div class="forecast-card-container" id="forecast-container"></div>
-    </div>
+    </main>
 
-  </main>
+    <footer>
+      <p>
+        Built with zeal by
+        <a
+          href="https://github.com/ianstreator"
+          target="_blank"
+          rel="noopener noreferrer"
+          >ianstreator</a
+        >
+      </p>
+      |
+      <p>
+        Powered by
+        <a
+          href="https://openweathermap.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >openweathermap.org</a
+        >
+      </p>
+    </footer>
 
-  <footer>
-      <p>Built with zeal by <a href="https://github.com/ianstreator" target="_blank"
-        rel="noopener noreferrer">ianstreator</a></p>
-    |
-    <p>Powered by <a href="https://weatherapi.com" target="_blank" rel="noopener noreferrer">WeatherAPI.com</a></p>
-  </footer>
-
-  <script type="module" src="/main.js"></script>
-
-</body>
-
+    <script type="module" src="/main.js"></script>
+  </body>
 </html>
