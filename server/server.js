@@ -26,32 +26,49 @@ app.get("/", (req, res) => {
 
 let background;
 const imageSrcCache = {};
-const WEATHER_API_BASE_URL = "http://api.weatherapi.com/v1";
+// const WEATHER_API_BASE_URL = "http://api.weatherapi.com/v1";
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+}
 
 app.post("/forecast", async (req, res) => {
   try {
+    console.log(req.body);
+    const lat = req.body.lat;
+    const lon = req.body.lon;
+    const key = process.env.WEATHER_API_KEY3;
     const { data: weatherData } = await axios.get(
-      `${WEATHER_API_BASE_URL}/forecast.json?key=${process.env.WEATHER_API_KEY}&q=${req.body.lat},${req.body.lon}&days=7`
+      // `${WEATHER_API_BASE_URL}/forecast.json?key=${process.env.WEATHER_API_KEY}&q=${lat},${lon}&days=7`
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${key}&exclude=minutely,hourly,alerts&units=imperial`
     );
-    const region = weatherData.location.tz_id.split("/")[1];
-    if (!imageSrcCache[region]) {
+    console.log(weatherData);
+    // const region = weatherData.location.tz_id.split("/")[1];
+    // const weatherDescription = weatherData.current.weather[0].main;
+    const weatherDescription = "zen";
+    console.log(weatherDescription);
+    if (!imageSrcCache[weatherDescription]) {
       //......attempt to scrape image from photo website.....
       const { data: imagesHTML } = await axios.get(
-        `https://unsplash.com/s/photos/${region}`
+        `https://unsplash.com/s/photos/${weatherDescription}`
       );
       const $ = cheerio.load(imagesHTML);
       const imageSrcSet = $(".ripi6").find(".YVj9w").attr("srcset");
 
       if (imageSrcSet === undefined) {
         //.....if scarping fails for any reason send "defaults" to use in-app images....
-        imageSrcCache[region] = "defaults";
+        imageSrcCache[weatherDescription] = "defaults";
       } else {
         //........caching images to avoid future scraping.....
         background = imageSrcSet.split(",")[16].split(" ")[1];
-        imageSrcCache[region] = background;
+        imageSrcCache[weatherDescription] = background;
       }
     }
-    const body = { json: weatherData, background: imageSrcCache[region] };
+    const body = {
+      json: weatherData,
+      background: imageSrcCache[weatherDescription],
+    };
     res.send(body);
   } catch (error) {
     res.status(500).send({ message: error });
