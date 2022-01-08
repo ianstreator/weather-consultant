@@ -11,7 +11,7 @@ const title = document.querySelector("title");
 const faviconLink = document.querySelector("link");
 
 function appendDataToCurrentCard(weatherData, icon) {
-  currentLocation.append(weatherData.location);
+  // currentLocation.append(weatherData.location);
   currentTemp.append(weatherData.temp);
   currentIcon.setAttribute("alt", true);
   currentIcon.alt = weatherData.description;
@@ -50,12 +50,22 @@ async function getCoordinates() {
 
 (async () => {
   await getCoordinates();
+  console.log(location);
   let BASE_URL = "";
   if (window.location.host.includes("localhost")) {
     BASE_URL = "http://localhost:4000";
   } else {
     BASE_URL = "https://my-local-weather-app.herokuapp.com";
   }
+  const daysOfTheWeek = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
 
   try {
     const options = {
@@ -65,6 +75,7 @@ async function getCoordinates() {
     };
     const res = await fetch(`${BASE_URL}/forecast`, options);
     let { json, background } = await res.json();
+    console.log(json);
 
     //....setting website background image........
     if (background === "defaults") {
@@ -75,36 +86,29 @@ async function getCoordinates() {
     body.style.cssText = `background-image: url(${background});`;
 
     //.....website title and favicon........
-    const town = json.location.name;
-    const region = json.location.region;
-    title.text = `${town} ${region}`;
-    const icon = json.current.condition.icon;
+    const town = json.timezone.split("/")[1];
+    title.text = `${town}'s weather`;
+    const icon = `http://openweathermap.org/img/wn/${json.current.weather[0].icon}.png`;
     faviconLink.href = icon;
 
     //....data for current day card.....
     const weatherData = {
-      location: json.location.name,
-      temp: json.current.temp_f,
-      description: json.current.condition.text,
+      // location: town,
+      temp: `${Math.round(json.current.temp)}°f`,
+      description: json.current.weather[0].description,
     };
     appendDataToCurrentCard(weatherData, icon);
 
-    const daysOfTheWeek = [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday",
-    ];
     //....data for forecast day cards.....
-    json.forecast.forecastday.forEach((e) => {
-      const icon = e.day.condition.icon;
-      const date = new Date(e.date_epoch * 1000);
+    json.daily.forEach((e, i) => {
+      if (i > 6) return;
+      // const icon = e.day.condition.icon;
+      const icon = `http://openweathermap.org/img/wn/${e.weather[0].icon}.png`;
+
+      const date = new Date(e.dt * 1000);
       const day = daysOfTheWeek[date.getDay()];
-      const temp = e.day.avgtemp_f;
-      const description = e.day.condition.text;
+      const description = e.weather[0].description;
+      const temp = `${Math.round(e.temp.day)}°f`;
 
       createForecastCards(day, temp, icon, description);
     });
