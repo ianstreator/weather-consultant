@@ -1,7 +1,6 @@
 import "./style.scss";
 import images from "./images/images.js";
 
-const currentLocation = document.getElementById("current-location");
 const currentTemp = document.getElementById("current-temp");
 const currentIcon = document.getElementById("current-icon");
 const currentDescription = document.getElementById("current-description");
@@ -9,9 +8,10 @@ const forecastContainer = document.getElementById("forecast-container");
 const body = document.querySelector("body");
 const title = document.querySelector("title");
 const faviconLink = document.querySelector("link");
+const clock = document.getElementById("time");
+const area = document.getElementById("location");
 
 function appendDataToCurrentCard(weatherData, icon) {
-  // currentLocation.append(weatherData.location);
   currentTemp.append(weatherData.temp);
   currentIcon.setAttribute("alt", true);
   currentIcon.alt = weatherData.description;
@@ -47,7 +47,29 @@ async function getCoordinates() {
   location.lat = pos.coords.latitude;
   location.lon = pos.coords.longitude;
 }
+const timeOfDay = () => {
+  let date = new Date();
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
 
+  const am_pm = hours < 12 ? "AM" : "PM";
+  if (minutes < 10) minutes = `0${minutes}`;
+  if (hours > 12) hours = hours - 12;
+  else if (hours === 0) hours = 12;
+
+  const time = `${hours}:${minutes} ${am_pm}`;
+  const DMY = `${date.getMonth() + 1}/${date.getDate()}/${
+    date.getFullYear() - 2000
+  }`;
+  const timeAndDate = { time, DMY };
+  return timeAndDate;
+};
+clock.textContent = timeOfDay().time;
+date.textContent = timeOfDay().DMY;
+setInterval(() => {
+  clock.textContent = timeOfDay().time;
+  date.textContent = timeOfDay().DMY;
+}, 30000);
 (async () => {
   await getCoordinates();
   console.log(location);
@@ -84,17 +106,15 @@ async function getCoordinates() {
         : (background = images.frog);
     }
     body.style.cssText = `background-image: url(${background});`;
-
     //.....website title and favicon........
     const town = json.timezone.split("/")[1];
     title.text = `${town}'s weather`;
-    const icon = `http://openweathermap.org/img/wn/${json.current.weather[0].icon}.png`;
+    const icon = images.map[json.current.weather[0].icon];
     faviconLink.href = icon;
 
     //....data for current day card.....
     const weatherData = {
-      // location: town,
-      temp: `${Math.round(json.current.temp)}°f`,
+      temp: `${Math.round(json.current.temp)}°`,
       description: json.current.weather[0].description,
     };
     appendDataToCurrentCard(weatherData, icon);
@@ -102,13 +122,11 @@ async function getCoordinates() {
     //....data for forecast day cards.....
     json.daily.forEach((e, i) => {
       if (i > 6) return;
-      // const icon = e.day.condition.icon;
-      const icon = `http://openweathermap.org/img/wn/${e.weather[0].icon}.png`;
-
+      const icon = images.map[e.weather[0].icon];
       const date = new Date(e.dt * 1000);
       const day = daysOfTheWeek[date.getDay()];
       const description = e.weather[0].description;
-      const temp = `${Math.round(e.temp.day)}°f`;
+      const temp = `${Math.round(e.temp.day)}°`;
 
       createForecastCards(day, temp, icon, description);
     });
