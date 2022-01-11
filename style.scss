@@ -195,6 +195,11 @@ footer {
     }
   }
 }
+@media screen and (max-width: 1125px) {
+  html {
+    font-size: 10px;
+  }
+}
 
 @media screen and (max-width: 600px) {
   html {
