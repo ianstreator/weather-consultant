@@ -48,13 +48,14 @@ main {
   flex-grow: 1;
   display: flex;
   flex-wrap: wrap;
-  padding: 1rem;
+  // padding: 1rem;
   .main-info {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--card-forecast-color);
+    background-color: rgb(0, 0, 0);
     margin: 1rem;
+    margin-bottom: 0;
     text-align: center;
     padding: 1rem;
     img {
@@ -68,17 +69,23 @@ main {
   }
 
   .current {
-    background-color: var(--card-color);
-    width: 20rem;
+    // background-color: var(--card-color);
+    background-image: linear-gradient(
+      to bottom,
+      rgb(0, 0, 0),
+      var(--card-color)
+    );
+    // width: 20rem;
     height: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 1rem;
+    // border-radius: 1rem;
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
     word-wrap: normal;
     margin: 1rem;
-    margin-right: auto;
+    margin-top: 0;
+    // margin-right: auto;
     h1 {
       font-size: 2.5rem;
       margin: 1rem;
@@ -123,16 +130,19 @@ main {
         Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
       font-style: italic;
       font-weight: lighter;
+      // font-weight: normal;
       margin-left: auto;
     }
   }
 
   .forecast-card-container {
-    background-color: var(--card-forecast-color);
-    backdrop-filter: blur(5px);
+    background-image: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.85),
+      rgba(255, 255, 255, 0)
+    );
     width: 100%;
     height: auto;
-    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
     display: flex;
     overflow-x: scroll;
     align-items: center;
@@ -180,11 +190,10 @@ footer {
   height: 4rem;
   width: 100%;
   min-width: fit-content;
-  background-color: var(--card-forecast-color);
+  background-color: rgba(0, 0, 0, 0.85);
   display: flex;
   justify-content: center;
   align-items: center;
-  backdrop-filter: blur(50px);
   padding: 1rem;
   p {
     margin: 0.5rem;
@@ -195,16 +204,15 @@ footer {
     }
   }
 }
-@media screen and (max-width: 1125px) {
+@media screen and (max-width: 1370px) {
   html {
     font-size: 10px;
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1010px) {
   html {
-    font-size: 6px;
-    overflow-x: hidden;
+    font-size: 8px;
   }
   main {
     display: flex;
@@ -230,19 +238,20 @@ footer {
         }
       }
       .current {
-        width: 60%;
+        // width: 60%;
         margin-right: auto;
+        margin-left: unset;
         h1 {
-          font-size: 4rem;
+          font-size: 3rem;
         }
         h2 {
-          font-size: 8rem;
+          font-size: 6rem;
         }
         img {
-          width: 20rem;
+          width: 15rem;
         }
         p {
-          font-size: 4rem;
+          font-size: 3rem;
         }
       }
     }
@@ -256,14 +265,13 @@ footer {
       min-height: fit-content;
       height: 35rem;
       margin-top: auto;
-      margin-bottom: 2rem;
       .weekday {
         border-radius: 5px;
         min-width: 17.5rem;
         height: 25rem;
         margin: 2.5rem;
         img {
-          width:10rem;
+          width: 10rem;
           margin: auto;
         }
         p {
@@ -279,5 +287,96 @@ footer {
   footer {
     font-size: 12px;
     padding: 4rem;
+  }
+}
+@media screen and (max-width: 835px) {
+  html {
+    font-size: 7px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  html {
+    font-size: 6px;
+  }
+  // main {
+  //   display: flex;
+  //   flex-direction: column;
+  //   align-items: center;
+  //   justify-content: center;
+  //   padding: unset;
+  //   .current-container {
+  //     width: 100%;
+  //     .main-info {
+  //       min-width: fit-content;
+  //       margin: unset;
+  //       margin-right: unset;
+  //       padding: 2rem;
+  //       img {
+  //         width: 2.5rem;
+  //         &#location {
+  //           width: 2.1rem;
+  //         }
+  //       }
+  //       h1 {
+  //         font-size: 2.5rem;
+  //       }
+  //     }
+  //     .current {
+  //       // width: 60%;
+  //       margin-right: auto;
+  //       margin-left: unset;
+  //       h1 {
+  //         font-size: 4rem;
+  //       }
+  //       h2 {
+  //         font-size: 8rem;
+  //       }
+  //       img {
+  //         width: 20rem;
+  //       }
+  //       p {
+  //         font-size: 4rem;
+  //       }
+  //     }
+  //   }
+
+  //   .quote-container {
+  //     width: 90%;
+  //     margin: auto;
+  //     padding: 2rem;
+  //   }
+  //   .forecast-card-container {
+  //     min-height: fit-content;
+  //     height: 35rem;
+  //     margin-top: auto;
+  //     .weekday {
+  //       border-radius: 5px;
+  //       min-width: 17.5rem;
+  //       height: 25rem;
+  //       margin: 2.5rem;
+  //       img {
+  //         width: 10rem;
+  //         margin: auto;
+  //       }
+  //       p {
+  //         margin: auto;
+  //         display: flex;
+  //         align-items: center;
+  //         justify-content: center;
+  //         font-size: 2.5rem;
+  //       }
+  //     }
+  //   }
+  // }
+  // footer {
+  //   font-size: 12px;
+  //   padding: 4rem;
+  // }
+}
+
+@media screen and (max-width: 400px) {
+  html {
+    font-size: 5px;
   }
 }
