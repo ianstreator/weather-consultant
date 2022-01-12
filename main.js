@@ -9,7 +9,7 @@ const body = document.querySelector("body");
 const title = document.querySelector("title");
 const faviconLink = document.querySelector("link");
 const clock = document.getElementById("time");
-const area = document.getElementById("location");
+const area = document.getElementById("area");
 
 function appendDataToCurrentCard(weatherData, icon) {
   currentTemp.append(weatherData.temp);
@@ -109,6 +109,7 @@ setInterval(() => {
     //.....website title and favicon........
     const town = json.timezone.split("/")[1];
     title.text = `${town}'s weather`;
+    area.innerHTML = `${town}`;
     const icon = images.map[json.current.weather[0].icon];
     faviconLink.href = icon;
 
