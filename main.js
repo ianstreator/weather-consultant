@@ -1,4 +1,4 @@
-import "./style.scss";
+// import "./style.scss";
 import images from "./images/images.js";
 
 const currentTemp = document.getElementById("current-temp");
@@ -35,8 +35,13 @@ function createForecastCards(weekday, temperature, icon, description) {
   const card = document.createElement("div");
   card.classList.add("weekday");
   card.append(h1, h2, img, p);
-
   forecastContainer.append(card);
+  card.addEventListener("click", () => {
+    // card.style.cssText = "background-color:black;transform: rotateY(180deg);";
+    card.classList.contains("extra-stats")
+      ? card.classList.remove("extra-stats")
+      : card.classList.add("extra-stats");
+  });
 }
 //.....asking user if the website can use their location....
 let location = {};
@@ -47,7 +52,8 @@ async function getCoordinates() {
   location.lat = pos.coords.latitude;
   location.lon = pos.coords.longitude;
 }
-const timeOfDay = () => {
+
+const time = () => {
   let date = new Date();
   let hours = date.getHours();
   let minutes = date.getMinutes();
@@ -64,12 +70,15 @@ const timeOfDay = () => {
   const timeAndDate = { time, DMY };
   return timeAndDate;
 };
-clock.textContent = timeOfDay().time;
-date.textContent = timeOfDay().DMY;
+//....setting clock and calendar....
+clock.textContent = time().time;
+date.textContent = time().DMY;
+//....updating clock and calendar....
 setInterval(() => {
-  clock.textContent = timeOfDay().time;
-  date.textContent = timeOfDay().DMY;
+  clock.textContent = time().time;
+  date.textContent = time().DMY;
 }, 30000);
+
 (async () => {
   await getCoordinates();
   console.log(location);
@@ -96,8 +105,10 @@ setInterval(() => {
       body: JSON.stringify(location),
     };
     const res = await fetch(`${BASE_URL}/forecast`, options);
-    let { json, background } = await res.json();
+    let { city, json, background } = await res.json();
     console.log(json);
+    console.log(city);
+    console.log(background);
 
     //....setting website background image........
     if (background === "defaults") {
@@ -107,9 +118,8 @@ setInterval(() => {
     }
     body.style.cssText = `background-image: url(${background});`;
     //.....website title and favicon........
-    const town = json.timezone.split("/")[1];
-    title.text = `${town}'s weather`;
-    area.innerHTML = `${town}`;
+    title.text = `${city}'s weather`;
+    area.innerHTML = `${city}`;
     const icon = images.map[json.current.weather[0].icon];
     faviconLink.href = icon;
 
