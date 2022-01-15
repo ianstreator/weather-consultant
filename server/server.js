@@ -39,6 +39,9 @@ app.post("/forecast", async (req, res) => {
     const lat = req.body.lat;
     const lon = req.body.lon;
     const key = process.env.WEATHER_API_KEY3;
+    const location = await axios.get(
+      `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=${key}`
+    );
     const { data: weatherData } = await axios.get(
       // `${WEATHER_API_BASE_URL}/forecast.json?key=${process.env.WEATHER_API_KEY}&q=${lat},${lon}&days=7`
       `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${key}&exclude=minutely,hourly,alerts&units=imperial`
@@ -66,9 +69,12 @@ app.post("/forecast", async (req, res) => {
       }
     }
     const body = {
+      city: location.data[0].name,
       json: weatherData,
       background: imageSrcCache[weatherDescription],
     };
+    // console.log(location.data[0].name);
+
     res.send(body);
   } catch (error) {
     res.status(500).send({ message: error });
