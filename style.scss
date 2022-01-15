@@ -1,7 +1,7 @@
 :root {
   --dark-background-color: #333;
   --dark-text-color: #dedede;
-  --dark-card-color: #223347ce;
+  --dark-card-color: #233448ce;
   --dark-card-forecast-color: #0000008f;
 
   --light-background-color: #ffffff;
@@ -120,6 +120,7 @@ main {
     margin: 1rem;
     margin-left: auto;
     .quote {
+      color: white;
       font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
         "Lucida Sans", Arial, sans-serif;
       font-size: 4rem;
@@ -139,7 +140,7 @@ main {
     background-image: linear-gradient(
       to top,
       rgba(0, 0, 0, 0.85),
-      rgba(255, 255, 255, 0)
+      rgba(0, 0, 0, 0)
     );
     width: 100%;
     height: auto;
@@ -158,9 +159,19 @@ main {
       display: flex;
       flex-direction: column;
       align-items: center;
-      border-radius: 15px;
+      border-radius: 5px;
       box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
       padding: 1rem;
+      transition: 600ms;
+      &.extra-stats {
+        transform: rotateY(180deg);
+        // background-image: linear-gradient(
+        //   to bottom,
+        //   rgb(0, 0, 0),
+        //   var(--card-color)
+        // );
+        background-color: black;
+      }
       h1 {
         font-size: 2rem;
         margin: 0.25rem;
@@ -171,7 +182,7 @@ main {
         margin: 0.25rem;
       }
       img {
-        width: rem;
+        width: 8rem;
         margin: 0.25rem;
       }
       p {
@@ -180,7 +191,7 @@ main {
         height: 4rem;
         width: 10rem;
         text-align: center;
-        word-break: break-word;
+        word-break: normal;
       }
     }
   }
@@ -199,14 +210,24 @@ footer {
     margin: 0.5rem;
     text-align: center;
     & a {
-      color: rgb(255, 180, 130);
+      color: #e96e50;
       text-decoration: none;
+      &:hover,
+      &:active {
+        color: #ffa993;
+      }
     }
   }
 }
 @media screen and (max-width: 1370px) {
   html {
     font-size: 10px;
+  }
+  footer {
+    padding-bottom: 3rem;
+    p {
+      font-size: 1.5rem;
+    }
   }
 }
 
@@ -238,7 +259,6 @@ footer {
         }
       }
       .current {
-        // width: 60%;
         margin-right: auto;
         margin-left: unset;
         h1 {
@@ -266,7 +286,6 @@ footer {
       height: 35rem;
       margin-top: auto;
       .weekday {
-        border-radius: 5px;
         min-width: 17.5rem;
         height: 25rem;
         margin: 2.5rem;
@@ -299,80 +318,6 @@ footer {
   html {
     font-size: 6px;
   }
-  // main {
-  //   display: flex;
-  //   flex-direction: column;
-  //   align-items: center;
-  //   justify-content: center;
-  //   padding: unset;
-  //   .current-container {
-  //     width: 100%;
-  //     .main-info {
-  //       min-width: fit-content;
-  //       margin: unset;
-  //       margin-right: unset;
-  //       padding: 2rem;
-  //       img {
-  //         width: 2.5rem;
-  //         &#location {
-  //           width: 2.1rem;
-  //         }
-  //       }
-  //       h1 {
-  //         font-size: 2.5rem;
-  //       }
-  //     }
-  //     .current {
-  //       // width: 60%;
-  //       margin-right: auto;
-  //       margin-left: unset;
-  //       h1 {
-  //         font-size: 4rem;
-  //       }
-  //       h2 {
-  //         font-size: 8rem;
-  //       }
-  //       img {
-  //         width: 20rem;
-  //       }
-  //       p {
-  //         font-size: 4rem;
-  //       }
-  //     }
-  //   }
-
-  //   .quote-container {
-  //     width: 90%;
-  //     margin: auto;
-  //     padding: 2rem;
-  //   }
-  //   .forecast-card-container {
-  //     min-height: fit-content;
-  //     height: 35rem;
-  //     margin-top: auto;
-  //     .weekday {
-  //       border-radius: 5px;
-  //       min-width: 17.5rem;
-  //       height: 25rem;
-  //       margin: 2.5rem;
-  //       img {
-  //         width: 10rem;
-  //         margin: auto;
-  //       }
-  //       p {
-  //         margin: auto;
-  //         display: flex;
-  //         align-items: center;
-  //         justify-content: center;
-  //         font-size: 2.5rem;
-  //       }
-  //     }
-  //   }
-  // }
-  // footer {
-  //   font-size: 12px;
-  //   padding: 4rem;
-  // }
 }
 
 @media screen and (max-width: 400px) {

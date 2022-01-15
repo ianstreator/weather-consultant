@@ -1,4 +1,4 @@
-// import "./style.scss";
+import "./style.css";
 import images from "./images/images.js";
 
 const currentTemp = document.getElementById("current-temp");
