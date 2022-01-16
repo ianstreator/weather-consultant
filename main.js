@@ -86,7 +86,7 @@ setInterval(() => {
   if (window.location.host.includes("localhost")) {
     BASE_URL = "http://localhost:4000";
   } else {
-    BASE_URL = "https://my-local-weather-app.herokuapp.com";
+    BASE_URL = "https://weather-consultant.herokuapp.com";
   }
   const daysOfTheWeek = [
     "Monday",
