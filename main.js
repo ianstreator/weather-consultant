@@ -1,5 +1,6 @@
 import "./style.css";
 import images from "./images/images.js";
+import { doc } from "prettier";
 
 const currentTemp = document.getElementById("current-temp");
 const currentIcon = document.getElementById("current-icon");
@@ -20,11 +21,27 @@ function appendDataToCurrentCard(weatherData, icon) {
   currentDescription.append(weatherData.description);
 }
 
-function createForecastCards(weekday, temperature, icon, description) {
+function createForecastCards(
+  weekday,
+  temp,
+  icon,
+  description,
+  tempHigh,
+  tempLow,
+  sunrise,
+  sunset,
+  windSpeed,
+  windDirection
+) {
+  //....create forecast card.........
+  const card = document.createElement("div");
+  card.classList.add("card");
+
+  //.....create front of card.........
   const h1 = document.createElement("h1");
   h1.append(weekday);
   const h2 = document.createElement("h2");
-  h2.append(temperature);
+  h2.append(temp);
   const img = document.createElement("img");
   img.setAttribute("alt", true);
   img.alt = description;
@@ -32,17 +49,47 @@ function createForecastCards(weekday, temperature, icon, description) {
   img.src = icon;
   const p = document.createElement("p");
   p.append(description);
-  const card = document.createElement("div");
-  card.classList.add("weekday");
-  card.append(h1, h2, img, p);
+
+  const cardFront = document.createElement("div");
+  cardFront.append(h1, h2, img, p);
+  cardFront.classList.add("front");
+
+  //....create back of card..........
+  const high = document.createElement("h1");
+  high.textContent = ``;
+  const low = document.createElement("h1");
+
+  const rise = document.createElement("div");
+  const riseIMG = document.createElement("img");
+  const riseTime = document.createElement("p");
+
+  const set = document.createElement("div");
+  const setIMG = document.createElement("img");
+  const setTime = document.createElement("p");
+
+  const wind = document.createElement("div");
+  wind.append(windSpeed, windDirection, images.forecastCardBackIcons.wind, images.forecastCardBackIcons.winddir);
+
+  const cardBack = document.createElement("div");
+  cardBack.append(high, low, rise, set, wind);
+  cardBack.classList.add("back", "hidden");
+
+  card.append(cardFront, cardBack);
   forecastContainer.append(card);
+
   card.addEventListener("click", () => {
-    // card.style.cssText = "background-color:black;transform: rotateY(180deg);";
-    card.classList.contains("extra-stats")
-      ? card.classList.remove("extra-stats")
-      : card.classList.add("extra-stats");
+    if (card.classList.contains("back")) {
+      card.classList.remove("back"), card.classList.add("front");
+      cardBack.classList.add("hidden");
+      cardFront.classList.remove("hidden");
+    } else {
+      card.classList.add("back"), card.classList.remove("front");
+      cardFront.classList.add("hidden");
+      cardBack.classList.remove("hidden");
+    }
   });
 }
+
 //.....asking user if the website can use their location....
 let location = {};
 async function getCoordinates() {
@@ -120,7 +167,7 @@ setInterval(() => {
     //.....website title and favicon........
     title.text = `${city}'s weather`;
     area.innerHTML = `${city}`;
-    const icon = images.map[json.current.weather[0].icon];
+    const icon = images.weatherIcons[json.current.weather[0].icon];
     faviconLink.href = icon;
 
     //....data for current day card.....
@@ -133,13 +180,32 @@ setInterval(() => {
     //....data for forecast day cards.....
     json.daily.forEach((e, i) => {
       if (i > 6) return;
-      const icon = images.map[e.weather[0].icon];
+      const icon = images.weatherIcons[e.weather[0].icon];
       const date = new Date(e.dt * 1000);
       const day = daysOfTheWeek[date.getDay()];
       const description = e.weather[0].description;
       const temp = `${Math.round(e.temp.day)}°`;
+      const windSpeed = `${Math.round(e.wind_speed)}`;
+      const windDirection = e.wind_deg;
+      const tempHigh = `${Math.ceil(e.temp.day)}°`;
+      const tempLow = `${Math.floor(e.temp.day)}°`;
+      const sunRise = e.sunrise;
+      const sunSet = e.sunset;
 
-      createForecastCards(day, temp, icon, description);
+      createForecastCards(
+        day,
+        temp,
+        icon,
+        description,
+        tempHigh,
+        tempLow,
+        sunRise,
+        sunSet,
+        windSpeed,
+        windDirection
+      );
+
+      // createForecastCardsBack();
     });
   } catch (error) {
     console.error(error);
