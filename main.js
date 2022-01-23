@@ -1,6 +1,5 @@
 import "./style.css";
 import images from "./images/images.js";
-import { doc } from "prettier";
 
 const currentTemp = document.getElementById("current-temp");
 const currentIcon = document.getElementById("current-icon");
@@ -56,37 +55,51 @@ function createForecastCards(
 
   //....create back of card..........
   const high = document.createElement("h1");
-  high.textContent = ``;
+  high.textContent = `${tempHigh}`;
   const low = document.createElement("h1");
+  low.textContent = `${tempLow}`;
+  low.style.cssText = "opacity:0.75";
 
   const rise = document.createElement("div");
+  rise.classList.add("sun");
   const riseIMG = document.createElement("img");
+  riseIMG.src = `${images.forecastCardBackIcons.sunrise}`;
   const riseTime = document.createElement("p");
+  riseTime.textContent = time(sunrise).time;
+  rise.append(riseIMG, riseTime);
 
   const set = document.createElement("div");
+  set.classList.add("sun");
   const setIMG = document.createElement("img");
+  setIMG.src = `${images.forecastCardBackIcons.sunset}`;
   const setTime = document.createElement("p");
+  setTime.textContent = time(sunset).time;
+  set.append(setIMG, setTime);
 
   const wind = document.createElement("div");
-  wind.append(windSpeed, windDirection, images.forecastCardBackIcons.wind, images.forecastCardBackIcons.winddir);
+  const windIMG = document.createElement("img");
+  windIMG.src = `${images.forecastCardBackIcons.wind}`;
+  windIMG.classList.add("wind-main");
+  const windDIR = document.createElement("img");
+  windDIR.style.cssText = `transform: rotateZ(${windDirection}deg)`;
+  windDIR.classList.add("wind-direction");
+  windDIR.src = `${images.forecastCardBackIcons.winddir}`;
+  const speed = document.createElement("h1");
+  speed.textContent = `${windSpeed}`;
+  wind.append(speed, windIMG, windDIR);
+  wind.classList.add("wind");
 
   const cardBack = document.createElement("div");
   cardBack.append(high, low, rise, set, wind);
-  cardBack.classList.add("back", "hidden");
+  cardBack.classList.add("back");
 
-  card.append(cardFront, cardBack);
+  card.append(cardBack, cardFront);
   forecastContainer.append(card);
 
   card.addEventListener("click", () => {
-    if (card.classList.contains("back")) {
-      card.classList.remove("back"), card.classList.add("front");
-      cardBack.classList.add("hidden");
-      cardFront.classList.remove("hidden");
-    } else {
-      card.classList.add("back"), card.classList.remove("front");
-      cardFront.classList.add("hidden");
-      cardBack.classList.remove("hidden");
-    }
+    card.classList.contains("flip")
+      ? card.classList.remove("flip")
+      : card.classList.add("flip");
   });
 }
 
@@ -100,10 +113,16 @@ async function getCoordinates() {
   location.lon = pos.coords.longitude;
 }
 
-const time = () => {
+const time = (the) => {
   let date = new Date();
   let hours = date.getHours();
   let minutes = date.getMinutes();
+  console.log(date.getTime(), "current date");
+  console.log(the, "forecast miliseconds");
+  if (the !== undefined) {
+    date = new Date(the);
+    console.log(date, "forecast date");
+  }
 
   const am_pm = hours < 12 ? "AM" : "PM";
   if (minutes < 10) minutes = `0${minutes}`;
@@ -111,19 +130,19 @@ const time = () => {
   else if (hours === 0) hours = 12;
 
   const time = `${hours}:${minutes} ${am_pm}`;
-  const DMY = `${date.getMonth() + 1}/${date.getDate()}/${
+  const month_day_year = `${date.getMonth() + 1}/${date.getDate()}/${
     date.getFullYear() - 2000
   }`;
-  const timeAndDate = { time, DMY };
+  const timeAndDate = { time, month_day_year };
   return timeAndDate;
 };
 //....setting clock and calendar....
 clock.textContent = time().time;
-date.textContent = time().DMY;
+date.textContent = time().month_day_year;
 //....updating clock and calendar....
 setInterval(() => {
   clock.textContent = time().time;
-  date.textContent = time().DMY;
+  date.textContent = time().month_day_year;
 }, 30000);
 
 (async () => {
@@ -187,8 +206,8 @@ setInterval(() => {
       const temp = `${Math.round(e.temp.day)}°`;
       const windSpeed = `${Math.round(e.wind_speed)}`;
       const windDirection = e.wind_deg;
-      const tempHigh = `${Math.ceil(e.temp.day)}°`;
-      const tempLow = `${Math.floor(e.temp.day)}°`;
+      const tempHigh = `H: ${Math.ceil(e.temp.max)}°`;
+      const tempLow = `L: ${Math.floor(e.temp.min)}°`;
       const sunRise = e.sunrise;
       const sunSet = e.sunset;
 
