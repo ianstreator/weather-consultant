@@ -47,9 +47,9 @@ app.post("/forecast", async (req, res) => {
       `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${key}&exclude=minutely,hourly,alerts&units=imperial`
     );
     console.log(weatherData);
-    // const region = weatherData.location.tz_id.split("/")[1];
-    // const weatherDescription = weatherData.current.weather[0].main;
-    const weatherDescription = "zen";
+    // const weatherDescription = weatherData.timezone.split("/")[1];
+    const weatherDescription = weatherData.current.weather[0].main;
+    // const weatherDescription = "zen";
     console.log(weatherDescription);
     if (!imageSrcCache[weatherDescription]) {
       //......attempt to scrape image from photo website.....

@@ -19,7 +19,12 @@ import snowNight from "./13n.png";
 import mistDay from "./50d.png";
 import mistNight from "./50n.png";
 
-const map = {
+import sunRise from "./sunrise.png";
+import sunSet from "./sunset.png";
+import windDir from "./wind-direction.svg";
+import wind from "./wind.svg";
+
+const weatherIcons = {
   "01d": clearSkyDay,
   "01n": clearSkyNight,
   "02d": fewCloudsDay,
@@ -40,4 +45,11 @@ const map = {
   "50n": mistNight,
 };
 
-export default { frog, elephant, map };
+const forecastCardBackIcons = {
+  sunrise: sunRise,
+  sunset: sunSet,
+  winddir: windDir,
+  wind: wind,
+};
+
+export default { frog, elephant, weatherIcons, forecastCardBackIcons };
