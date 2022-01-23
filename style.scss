@@ -48,7 +48,6 @@ main {
   flex-grow: 1;
   display: flex;
   flex-wrap: wrap;
-  // padding: 1rem;
   .main-info {
     display: flex;
     justify-content: center;
@@ -69,23 +68,19 @@ main {
   }
 
   .current {
-    // background-color: var(--card-color);
     background-image: linear-gradient(
       to bottom,
       rgb(0, 0, 0),
       var(--card-color)
     );
-    // width: 20rem;
     height: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
-    // border-radius: 1rem;
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
     word-wrap: normal;
     margin: 1rem;
     margin-top: 0;
-    // margin-right: auto;
     h1 {
       font-size: 2.5rem;
       margin: 1rem;
@@ -131,7 +126,6 @@ main {
         Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
       font-style: italic;
       font-weight: lighter;
-      // font-weight: normal;
       margin-left: auto;
     }
   }
@@ -151,47 +145,98 @@ main {
     &::-webkit-scrollbar {
       display: none;
     }
-    .weekday {
-      background-color: var(--card-color);
+    .card {
       min-width: 14rem;
-      height: fit-content;
+      height: 22rem;
       margin: 2.5rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      border-radius: 5px;
       box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
-      padding: 1rem;
-      transition: 600ms;
-      &.extra-stats {
+      transition: 800ms;
+      transform-style: preserve-3d;
+      &.flip {
         transform: rotateY(180deg);
-        // background-image: linear-gradient(
-        //   to bottom,
-        //   rgb(0, 0, 0),
-        //   var(--card-color)
-        // );
-        background-color: black;
+        .front {
+          opacity: 0;
+        }
+        .back {
+          opacity: 1;
+        }
       }
-      h1 {
-        font-size: 2rem;
-        margin: 0.25rem;
-        text-decoration: underline;
+      .back {
+        position: absolute;
+        transform: rotateY(180deg);
+        background-color: var(--card-color);
+        transition: 600ms;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        border-radius: 5px;
+        padding: 1rem;
+        opacity: 0;
+        h1 {
+          margin: auto;
+        }
+        .sun {
+          margin: auto;
+          img {
+            // width: 100%;
+            height: 2rem;
+          }
+        }
+        .wind {
+          margin-top: auto;
+          width: 100%;
+          position: relative;
+          .wind-main {
+            width: 100%;
+          }
+          h1 {
+            position: absolute;
+            bottom: 0;
+            font-size: 2.75rem;
+          }
+          .wind-direction {
+            position: absolute;
+            width: 20px;
+            top: 1.2rem;
+            left: 0.8rem;
+          }
+        }
       }
-      h2 {
-        font-size: 2.5rem;
-        margin: 0.25rem;
-      }
-      img {
-        width: 8rem;
-        margin: 0.25rem;
-      }
-      p {
-        font-size: 2rem;
-        margin: 0.25rem;
-        height: 4rem;
-        width: 10rem;
-        text-align: center;
-        word-break: normal;
+      .front {
+        position: absolute;
+        background-color: var(--card-color);
+        transition: 600ms;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 5px;
+        padding: 1rem;
+        h1 {
+          font-size: 2rem;
+          margin: 0.25rem;
+          margin-bottom: 1rem;
+          text-decoration: underline;
+        }
+        h2 {
+          font-size: 2.5rem;
+          margin: 0.25rem;
+        }
+        img {
+          width: 8rem;
+          margin: 0.25rem;
+        }
+        p {
+          font-size: 2rem;
+          margin: auto;
+          height: fit-content;
+          width: 10rem;
+          text-align: center;
+          word-break: normal;
+        }
       }
     }
   }
@@ -210,18 +255,18 @@ footer {
     margin: 0.5rem;
     text-align: center;
     & a {
-      color: #e96e50;
+      color: #508de9;
       text-decoration: none;
       &:hover,
       &:active {
-        color: #ffa993;
+        color: #93cbff;
       }
     }
   }
 }
-@media screen and (max-width: 1370px) {
+@media screen and (max-width: 1490px) {
   html {
-    font-size: 10px;
+    font-size: 12px;
   }
   footer {
     padding-bottom: 3rem;
@@ -230,8 +275,13 @@ footer {
     }
   }
 }
+@media screen and (max-width: 1300px) {
+  html {
+    font-size: 10px;
+  }
+}
 
-@media screen and (max-width: 1010px) {
+@media screen and (max-width: 1095px) {
   html {
     font-size: 8px;
   }
@@ -275,32 +325,80 @@ footer {
         }
       }
     }
-
     .quote-container {
       width: 90%;
       margin: auto;
       padding: 2rem;
     }
     .forecast-card-container {
-      min-height: fit-content;
-      height: 35rem;
-      margin-top: auto;
-      .weekday {
-        min-width: 17.5rem;
-        height: 25rem;
-        margin: 2.5rem;
-        img {
-          width: 10rem;
-          margin: auto;
+      .card {
+        font-size: 10px;
+        min-width: 14em;
+        height: 22em;
+        .front {
+          h1 {
+            font-size: 2em;
+            margin: 0.25em;
+            margin-bottom: 1em;
+          }
+          h2 {
+            font-size: 2.5em;
+            margin: 0.25em;
+          }
+          img {
+            width: 6em;
+            margin: 0.25em;
+          }
+          p {
+            font-size: 2em;
+            width: 6em;
+          }
         }
-        p {
-          margin: auto;
+        .back {
+          position: absolute;
+          transform: rotateY(180deg);
+          background-color: var(--card-color);
+          transition: 600ms;
+          width: 100%;
+          height: 100%;
           display: flex;
+          flex-wrap: wrap;
           align-items: center;
-          justify-content: center;
-          font-size: 2.5rem;
+          border-radius: 5px;
+          padding: 1rem;
+          opacity: 0;
+          h1 {
+            margin: auto;
+          }
+          .sun {
+            margin: auto;
+            img {
+              // width: 100%;
+              height: 2rem;
+            }
+          }
+          .wind {
+            margin-top: auto;
+            width: 100%;
+            position: relative;
+            .wind-main {
+              width: 100%;
+            }
+            h1 {
+              position: absolute;
+              bottom: 0;
+              font-size: 2.75em;
+            }
+            .wind-direction {
+              position: absolute;
+              width: 20px;
+              top: 1.2em;
+              left: 0.8em;
+            }
+          }
         }
       }
+      margin-top: auto;
     }
   }
   footer {
