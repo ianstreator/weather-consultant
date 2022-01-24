@@ -149,12 +149,16 @@ main {
       display: none;
     }
     .card {
+      user-select: none;
       min-width: 14rem;
       height: 22rem;
       margin: 2.5rem;
       box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
       transition: 800ms;
       transform-style: preserve-3d;
+      &:hover {
+        cursor: pointer;
+      }
       &.flip {
         transform: rotateY(180deg);
         .front {
