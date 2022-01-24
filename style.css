@@ -1,6 +1,6 @@
 :root {
   --dark-background-color: #333;
-  --dark-text-color: #dedede;
+  --dark-text-color: #ffffff;
   --dark-card-color: #233448ce;
   --dark-card-forecast-color: #0000008f;
   --light-background-color: #ffffff;
@@ -82,6 +82,7 @@ main .main-info {
 main .main-info img {
   margin: 0.5rem;
   margin-left: 2rem;
+  width: 2rem;
 }
 
 main .main-info h1 {
@@ -137,6 +138,7 @@ main .current p {
 main .quote-container {
   float: right;
   width: 50%;
+  min-width: 30%;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
@@ -174,8 +176,8 @@ main .quote-container .quote-author {
 }
 
 main .forecast-card-container {
-  background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(0, 0, 0, 0.85)), to(rgba(0, 0, 0, 0)));
-  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0));
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(10%, rgba(0, 0, 0, 0.85)), color-stop(60%, rgba(0, 0, 0, 0.6)), to(rgba(0, 0, 0, 0)));
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.85) 10%, rgba(0, 0, 0, 0.6) 60%, rgba(0, 0, 0, 0));
   width: 100%;
   height: auto;
   display: -webkit-box;
@@ -247,10 +249,23 @@ main .forecast-card-container .card .back h1 {
 
 main .forecast-card-container .card .back .sun {
   margin: auto;
+  margin-top: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 main .forecast-card-container .card .back .sun img {
-  height: 2rem;
+  margin-bottom: .5rem;
+  height: 2.5rem;
+}
+
+main .forecast-card-container .card .back .sun h1 {
+  font-size: 1.5rem;
 }
 
 main .forecast-card-container .card .back .wind {
@@ -271,9 +286,9 @@ main .forecast-card-container .card .back .wind h1 {
 
 main .forecast-card-container .card .back .wind .wind-direction {
   position: absolute;
-  width: 20px;
-  top: 1.2rem;
-  left: 0.8rem;
+  width: 1.25rem;
+  top: 1.25rem;
+  left: .9rem;
 }
 
 main .forecast-card-container .card .front {
@@ -376,9 +391,9 @@ footer p a:hover, footer p a:active {
   }
 }
 
-@media screen and (max-width: 1095px) {
+@media screen and (max-width: 1100px) {
   html {
-    font-size: 8px;
+    font-size: 9px;
   }
   main {
     display: -webkit-box;
@@ -427,7 +442,7 @@ footer p a:hover, footer p a:active {
     font-size: 6rem;
   }
   main .current-container .current img {
-    width: 15rem;
+    width: 12.5rem;
   }
   main .current-container .current p {
     font-size: 3rem;
@@ -441,7 +456,7 @@ footer p a:hover, footer p a:active {
     margin-top: auto;
   }
   main .forecast-card-container .card {
-    font-size: 10px;
+    font-size: 9px;
     min-width: 14em;
     height: 22em;
   }
@@ -462,54 +477,22 @@ footer p a:hover, footer p a:active {
     font-size: 2em;
     width: 6em;
   }
-  main .forecast-card-container .card .back {
-    position: absolute;
-    -webkit-transform: rotateY(180deg);
-            transform: rotateY(180deg);
-    background-color: var(--card-color);
-    -webkit-transition: 600ms;
-    transition: 600ms;
-    width: 100%;
-    height: 100%;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    border-radius: 5px;
-    padding: 1rem;
-    opacity: 0;
-  }
-  main .forecast-card-container .card .back h1 {
-    margin: auto;
-  }
   main .forecast-card-container .card .back .sun {
-    margin: auto;
+    margin-top: 2em;
   }
   main .forecast-card-container .card .back .sun img {
-    height: 2rem;
+    height: 2.5em;
   }
-  main .forecast-card-container .card .back .wind {
-    margin-top: auto;
-    width: 100%;
-    position: relative;
-  }
-  main .forecast-card-container .card .back .wind .wind-main {
-    width: 100%;
+  main .forecast-card-container .card .back .sun h1 {
+    font-size: 1.5em;
   }
   main .forecast-card-container .card .back .wind h1 {
-    position: absolute;
-    bottom: 0;
     font-size: 2.75em;
   }
   main .forecast-card-container .card .back .wind .wind-direction {
-    position: absolute;
-    width: 20px;
-    top: 1.2em;
-    left: 0.8em;
+    width: 1.3em;
+    top: 1.25em;
+    left: 0.9em;
   }
   footer {
     font-size: 12px;

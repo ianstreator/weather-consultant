@@ -48,8 +48,8 @@ app.post("/forecast", async (req, res) => {
     );
     console.log(weatherData);
     // const weatherDescription = weatherData.timezone.split("/")[1];
-    const weatherDescription = weatherData.current.weather[0].main;
-    // const weatherDescription = "zen";
+    // const weatherDescription = weatherData.current.weather[0].main;
+    const weatherDescription = "zen";
     console.log(weatherDescription);
     if (!imageSrcCache[weatherDescription]) {
       //......attempt to scrape image from photo website.....
@@ -58,6 +58,8 @@ app.post("/forecast", async (req, res) => {
       );
       const $ = cheerio.load(imagesHTML);
       const imageSrcSet = $(".ripi6").find(".YVj9w").attr("srcset");
+      // const imageSrcSet = $(".ripi6").children()[8];
+      // console.log(imageSrcSet);
 
       if (imageSrcSet === undefined) {
         //.....if scarping fails for any reason send "defaults" to use in-app images....

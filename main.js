@@ -58,13 +58,13 @@ function createForecastCards(
   high.textContent = `${tempHigh}`;
   const low = document.createElement("h1");
   low.textContent = `${tempLow}`;
-  low.style.cssText = "opacity:0.75";
+  low.style.cssText = "opacity:0.65";
 
   const rise = document.createElement("div");
   rise.classList.add("sun");
   const riseIMG = document.createElement("img");
   riseIMG.src = `${images.forecastCardBackIcons.sunrise}`;
-  const riseTime = document.createElement("p");
+  const riseTime = document.createElement("h1");
   riseTime.textContent = time(sunrise).time;
   rise.append(riseIMG, riseTime);
 
@@ -72,7 +72,7 @@ function createForecastCards(
   set.classList.add("sun");
   const setIMG = document.createElement("img");
   setIMG.src = `${images.forecastCardBackIcons.sunset}`;
-  const setTime = document.createElement("p");
+  const setTime = document.createElement("h1");
   setTime.textContent = time(sunset).time;
   set.append(setIMG, setTime);
 
@@ -86,6 +86,7 @@ function createForecastCards(
   windDIR.src = `${images.forecastCardBackIcons.winddir}`;
   const speed = document.createElement("h1");
   speed.textContent = `${windSpeed}`;
+  if (windSpeed.toString().length < 2) speed.style.cssText = "margin-left:1.5rem"
   wind.append(speed, windIMG, windDIR);
   wind.classList.add("wind");
 
@@ -117,11 +118,16 @@ const time = (the) => {
   let date = new Date();
   let hours = date.getHours();
   let minutes = date.getMinutes();
-  console.log(date.getTime(), "current date");
-  console.log(the, "forecast miliseconds");
   if (the !== undefined) {
+    console.log(the)
     date = new Date(the);
-    console.log(date, "forecast date");
+    hours = date.getHours(the);
+    minutes = date.getMinutes(the);
+    if (minutes < 10) minutes = `0${minutes}`;
+    if (hours > 12) hours = hours - 12;
+    else if (hours === 0) hours = 12;
+    const time = `${hours}:${minutes}`;
+    return {time};
   }
 
   const am_pm = hours < 12 ? "AM" : "PM";
@@ -175,6 +181,7 @@ setInterval(() => {
     console.log(json);
     console.log(city);
     console.log(background);
+    console.log(Date(json.current.dt))
 
     //....setting website background image........
     if (background === "defaults") {
@@ -208,8 +215,9 @@ setInterval(() => {
       const windDirection = e.wind_deg;
       const tempHigh = `H: ${Math.ceil(e.temp.max)}°`;
       const tempLow = `L: ${Math.floor(e.temp.min)}°`;
-      const sunRise = e.sunrise;
-      const sunSet = e.sunset;
+      const sunRise = e.sunrise * 1000;
+      const sunSet = e.sunset * 1000;
+
 
       createForecastCards(
         day,

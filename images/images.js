@@ -19,8 +19,8 @@ import snowNight from "./13n.png";
 import mistDay from "./50d.png";
 import mistNight from "./50n.png";
 
-import sunRise from "./sunrise.png";
-import sunSet from "./sunset.png";
+import sunRise from "./sunrise.svg";
+import sunSet from "./sunset.svg";
 import windDir from "./wind-direction.svg";
 import wind from "./wind.svg";
 

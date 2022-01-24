@@ -1,6 +1,6 @@
 :root {
   --dark-background-color: #333;
-  --dark-text-color: #dedede;
+  --dark-text-color: #ffffff;
   --dark-card-color: #233448ce;
   --dark-card-forecast-color: #0000008f;
 
@@ -60,6 +60,7 @@ main {
     img {
       margin: 0.5rem;
       margin-left: 2rem;
+      width: 2rem;
     }
     h1 {
       margin: 0.5rem;
@@ -103,6 +104,7 @@ main {
   .quote-container {
     float: right;
     width: 50%;
+    min-width: 30%;
     height: fit-content;
     background-color: var(--card-forecast-color);
     backdrop-filter: blur(8px);
@@ -133,7 +135,8 @@ main {
   .forecast-card-container {
     background-image: linear-gradient(
       to top,
-      rgba(0, 0, 0, 0.85),
+      rgba(0, 0, 0, 0.85)10%,
+      rgba(0,0,0,0.6)60%,
       rgba(0, 0, 0, 0)
     );
     width: 100%;
@@ -179,9 +182,15 @@ main {
         }
         .sun {
           margin: auto;
+          margin-top: 2rem;
+          display: flex;
+          flex-direction: column;
           img {
-            // width: 100%;
-            height: 2rem;
+            margin-bottom: .5rem;
+            height: 2.5rem;
+          }
+          h1 {
+            font-size: 1.5rem;
           }
         }
         .wind {
@@ -198,9 +207,9 @@ main {
           }
           .wind-direction {
             position: absolute;
-            width: 20px;
-            top: 1.2rem;
-            left: 0.8rem;
+            width: 1.25rem;
+            top: 1.25rem;
+            left: .9rem;
           }
         }
       }
@@ -281,9 +290,9 @@ footer {
   }
 }
 
-@media screen and (max-width: 1095px) {
+@media screen and (max-width: 1100px) {
   html {
-    font-size: 8px;
+    font-size: 9px;
   }
   main {
     display: flex;
@@ -318,7 +327,7 @@ footer {
           font-size: 6rem;
         }
         img {
-          width: 15rem;
+          width: 12.5rem;
         }
         p {
           font-size: 3rem;
@@ -332,7 +341,7 @@ footer {
     }
     .forecast-card-container {
       .card {
-        font-size: 10px;
+        font-size: 9px;
         min-width: 14em;
         height: 22em;
         .front {
@@ -355,45 +364,23 @@ footer {
           }
         }
         .back {
-          position: absolute;
-          transform: rotateY(180deg);
-          background-color: var(--card-color);
-          transition: 600ms;
-          width: 100%;
-          height: 100%;
-          display: flex;
-          flex-wrap: wrap;
-          align-items: center;
-          border-radius: 5px;
-          padding: 1rem;
-          opacity: 0;
-          h1 {
-            margin: auto;
-          }
           .sun {
-            margin: auto;
+            margin-top: 2em;
             img {
-              // width: 100%;
-              height: 2rem;
+              height: 2.5em;
+            }
+            h1 {
+              font-size: 1.5em;
             }
           }
           .wind {
-            margin-top: auto;
-            width: 100%;
-            position: relative;
-            .wind-main {
-              width: 100%;
-            }
             h1 {
-              position: absolute;
-              bottom: 0;
               font-size: 2.75em;
             }
             .wind-direction {
-              position: absolute;
-              width: 20px;
-              top: 1.2em;
-              left: 0.8em;
+              width: 1.3em;
+              top: 1.25em;
+              left: 0.9em;
             }
           }
         }
