@@ -294,9 +294,9 @@ main .forecast-card-container .card .back .wind h1 {
 
 main .forecast-card-container .card .back .wind .wind-direction {
   position: absolute;
-  width: 1.25rem;
-  top: 1.25rem;
-  left: .9rem;
+  width: 3.25rem;
+  top: .5rem;
+  left: .1rem;
 }
 
 main .forecast-card-container .card .front {
@@ -442,6 +442,8 @@ footer p a:hover, footer p a:active {
   main .current-container .current {
     margin-right: auto;
     margin-left: unset;
+    -webkit-box-shadow: 0px 0px 10px 0px black;
+            box-shadow: 0px 0px 10px 0px black;
   }
   main .current-container .current h1 {
     font-size: 3rem;
@@ -457,10 +459,13 @@ footer p a:hover, footer p a:active {
   }
   main .quote-container {
     width: 90%;
-    margin: auto;
+    margin: 2.5rem;
     padding: 2rem;
   }
   main .forecast-card-container {
+    -webkit-box-pack: stretch;
+        -ms-flex-pack: stretch;
+            justify-content: stretch;
     margin-top: auto;
   }
   main .forecast-card-container .card {
@@ -471,7 +476,6 @@ footer p a:hover, footer p a:active {
   main .forecast-card-container .card .front h1 {
     font-size: 2em;
     margin: 0.25em;
-    margin-bottom: 1em;
   }
   main .forecast-card-container .card .front h2 {
     font-size: 2.5em;
@@ -498,9 +502,9 @@ footer p a:hover, footer p a:active {
     font-size: 2.75em;
   }
   main .forecast-card-container .card .back .wind .wind-direction {
-    width: 1.3em;
-    top: 1.25em;
-    left: 0.9em;
+    width: 3.25em;
+    top: 1em;
+    left: 0.25em;
   }
   footer {
     font-size: 12px;

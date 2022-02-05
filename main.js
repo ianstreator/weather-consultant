@@ -118,6 +118,7 @@ const time = (the) => {
   let date = new Date();
   let hours = date.getHours();
   let minutes = date.getMinutes();
+  
   if (the !== undefined) {
     console.log(the)
     date = new Date(the);

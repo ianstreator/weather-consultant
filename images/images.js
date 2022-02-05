@@ -1,5 +1,6 @@
 import elephant from "./baby-elephant.jpg";
 import frog from "./jungle-frog.jpg";
+
 import clearSkyDay from "./01d.png";
 import clearSkyNight from "./01n.png";
 import fewCloudsDay from "./02d.png";
