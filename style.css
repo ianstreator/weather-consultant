@@ -463,9 +463,9 @@ footer p a:hover, footer p a:active {
     padding: 2rem;
   }
   main .forecast-card-container {
-    -webkit-box-pack: stretch;
-        -ms-flex-pack: stretch;
-            justify-content: stretch;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
     margin-top: auto;
   }
   main .forecast-card-container .card {
