@@ -26,7 +26,9 @@ app.get("/", (req, res) => {
 
 let background;
 const imageSrcCache = {};
-// const WEATHER_API_BASE_URL = "http://api.weatherapi.com/v1";
+const quoteCache = {};
+const imageSearch = ["mountains", "icebergs", "islands", "waterfalls"];
+const WEATHER_API_BASE_URL = "http://api.openweathermap.org/";
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -40,26 +42,31 @@ app.post("/forecast", async (req, res) => {
     const lon = req.body.lon;
     const key = process.env.WEATHER_API_KEY3;
     const location = await axios.get(
-      `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=${key}`
+      `${WEATHER_API_BASE_URL}geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=${key}`
     );
     const { data: weatherData } = await axios.get(
-      // `${WEATHER_API_BASE_URL}/forecast.json?key=${process.env.WEATHER_API_KEY}&q=${lat},${lon}&days=7`
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${key}&exclude=minutely,hourly,alerts&units=imperial`
+      `${WEATHER_API_BASE_URL}data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${key}&exclude=minutely,hourly,alerts&units=imperial`
     );
     console.log(weatherData);
-    let weatherDescription = "dismal";
-    // weatherDescription = weatherData.timezone.split("/")[1];
-    // weatherDescription = weatherData.current.weather[0].description.split(' ')[0];
+    let weatherDescription = imageSearch[getRandomInt(0, 4)];
     console.log(weatherDescription);
+    console.log(imageSrcCache);
+    // const { data: quote } = await axios.get(
+    //   "https://parade.com/973277/jessicasager/inspirational-quotes/"
+    // );
+    // const $quote = cheerio.load(quote);
+    // const $selectedQuote = $quote("span > p");
+    // console.log($selectedQuote);
     if (!imageSrcCache[weatherDescription]) {
       //......attempt to scrape image from photo website.....
       const { data: imagesHTML } = await axios.get(
         `https://unsplash.com/s/photos/${weatherDescription}`
       );
       const $ = cheerio.load(imagesHTML);
-      const imageSrcSet = $(".ripi6").find(".YVj9w").attr("srcset");
-      // const imageSrcSet = $(".ripi6").children()[8];
-      // console.log(imageSrcSet);
+      // const imageSrcLength = $(".ripi6").children().find(".YVj9w").length;
+      const imageSrcSet = $(".ripi6").children().find(".YVj9w")[
+        getRandomInt(1, 25)
+      ].attribs.srcset;
 
       if (imageSrcSet === undefined) {
         //.....if scarping fails for any reason send "defaults" to use in-app images....
