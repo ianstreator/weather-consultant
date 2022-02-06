@@ -26,8 +26,8 @@ app.get("/", (req, res) => {
 
 let background;
 const imageSrcCache = {};
-const quoteCache = {};
-const imageSearch = ["mountains", "icebergs", "islands", "waterfalls"];
+// const quoteCache = {};
+const imageSearch = ["mountains", "icebergs", "iceland", "leaves", "zen", "northern lights"];
 const WEATHER_API_BASE_URL = "http://api.openweathermap.org/";
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -47,27 +47,30 @@ app.post("/forecast", async (req, res) => {
     const { data: weatherData } = await axios.get(
       `${WEATHER_API_BASE_URL}data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${key}&exclude=minutely,hourly,alerts&units=imperial`
     );
-    console.log(weatherData);
-    let weatherDescription = imageSearch[getRandomInt(0, 4)];
-    console.log(weatherDescription);
-    console.log(imageSrcCache);
-    // const { data: quote } = await axios.get(
-    //   "https://parade.com/973277/jessicasager/inspirational-quotes/"
+    // console.log(weatherData);
+    let weatherDescription = imageSearch[getRandomInt(0, 6)];
+    // console.log(weatherDescription);
+    // console.log(imageSrcCache);
+    // const quote = await axios.get(
+    //   "https://www.brainyquote.com/profession/quotes-by-philosophers"
     // );
-    // const $quote = cheerio.load(quote);
-    // const $selectedQuote = $quote("span > p");
-    // console.log($selectedQuote);
+    // console.log(quote)
+    // const $ = cheerio.load(quote);
+    // console.log($)
+    // const selectedQuote = $(".qbc2").children().length;
+    // console.log(selectedQuote, 'hello');
     if (!imageSrcCache[weatherDescription]) {
       //......attempt to scrape image from photo website.....
       const { data: imagesHTML } = await axios.get(
         `https://unsplash.com/s/photos/${weatherDescription}`
       );
       const $ = cheerio.load(imagesHTML);
-      // const imageSrcLength = $(".ripi6").children().find(".YVj9w").length;
+      const imageSrcLength = $(".ripi6").children().find(".YVj9w").length;
+      console.log(imageSrcLength)
       const imageSrcSet = $(".ripi6").children().find(".YVj9w")[
-        getRandomInt(1, 25)
+        getRandomInt(12, 25)
       ].attribs.srcset;
-
+      // console.log(imageSrcSet)
       if (imageSrcSet === undefined) {
         //.....if scarping fails for any reason send "defaults" to use in-app images....
         imageSrcCache[weatherDescription] = "defaults";

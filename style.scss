@@ -153,6 +153,7 @@ main {
       min-width: 14rem;
       height: 22rem;
       margin: 2.5rem;
+      border-radius: 5px;
       box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
       transition: 800ms;
       transform-style: preserve-3d;
@@ -346,7 +347,6 @@ footer {
     }
     .forecast-card-container {
       .card {
-        margin: 2.5em;
         font-size: 9px;
         min-width: 14em;
         height: 22em;
