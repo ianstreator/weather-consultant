@@ -59,7 +59,6 @@ main {
     width: fit-content;
     height: fit-content;
     margin: 1rem;
-    margin-top: 0;
     .main-info {
       display: flex;
       justify-content: space-evenly;
@@ -335,9 +334,11 @@ footer {
     font-size: 6px;
   }
   main {
+    flex-shrink: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: unset;
     .current-container {
       width: 100%;
       margin: unset;
@@ -370,18 +371,21 @@ footer {
     .quote-container {
       width: 90%;
       margin: 2.5rem;
+      margin-top: 5rem;
       padding: 2rem;
     }
     .forecast-container {
       padding: 2em;
       margin: 0;
+      position: absolute;
+      bottom: 0;
       .forecast-card-container {
-        gap: 2em;
+        gap: 5em;
         .card {
           font-size: 9px;
           min-width: 14em;
           height: 22em;
-          margin: 1em;
+          // margin: 1em;
           .front {
             h1 {
               font-size: 2em;

@@ -84,7 +84,6 @@ main .current-container {
   height: -moz-fit-content;
   height: fit-content;
   margin: 1rem;
-  margin-top: 0;
 }
 
 main .current-container .main-info {
@@ -449,6 +448,8 @@ footer p a:hover, footer p a:active {
     font-size: 6px;
   }
   main {
+    -ms-flex-negative: 1rem;
+        flex-shrink: 1rem;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -459,6 +460,9 @@ footer p a:hover, footer p a:active {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
+    -webkit-box-pack: unset;
+        -ms-flex-pack: unset;
+            justify-content: unset;
   }
   main .current-container {
     width: 100%;
@@ -495,20 +499,22 @@ footer p a:hover, footer p a:active {
   main .quote-container {
     width: 90%;
     margin: 2.5rem;
+    margin-top: 5rem;
     padding: 2rem;
   }
   main .forecast-container {
     padding: 2em;
     margin: 0;
+    position: absolute;
+    bottom: 0;
   }
   main .forecast-container .forecast-card-container {
-    gap: 2em;
+    gap: 5em;
   }
   main .forecast-container .forecast-card-container .card {
     font-size: 9px;
     min-width: 14em;
     height: 22em;
-    margin: 1em;
   }
   main .forecast-container .forecast-card-container .card .front h1 {
     font-size: 2em;
