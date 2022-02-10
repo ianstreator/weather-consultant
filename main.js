@@ -101,7 +101,7 @@ function createForecastCards(
   card.append(cardBack, cardFront);
   forecastContainer.append(card);
 
-  card.addEventListener("mouseenter", () => {
+  card.addEventListener("click", () => {
     card.classList.contains("flip")
       ? card.classList.remove("flip")
       : card.classList.add("flip");

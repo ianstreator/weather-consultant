@@ -174,7 +174,7 @@ main {
       transform-style: preserve-3d;
       &:hover {
         cursor: pointer;
-        background-color: rgba(255, 255, 255, 0.25);
+        background-color: rgba(255, 255, 255, 0.5);
       }
       &.flip {
         transform: rotateY(180deg);
@@ -359,7 +359,9 @@ footer {
     }
     .forecast-card-container {
       padding: 2em;
-      padding-top: 14em;
+      // padding-top: 14em;
+      margin: unset;
+      margin-top: auto;
       .card {
         font-size: 9px;
         min-width: 14em;

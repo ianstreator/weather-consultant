@@ -233,7 +233,7 @@ main .forecast-card-container .card {
 
 main .forecast-card-container .card:hover {
   cursor: pointer;
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 main .forecast-card-container .card.flip {
@@ -478,7 +478,8 @@ footer p a:hover, footer p a:active {
   }
   main .forecast-card-container {
     padding: 2em;
-    padding-top: 14em;
+    margin: unset;
+    margin-top: auto;
   }
   main .forecast-card-container .card {
     font-size: 9px;
