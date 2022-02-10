@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="./images/location.png"/>
+    <link rel="icon" href="./images/location.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Local Weather</title>
   </head>
@@ -11,15 +11,20 @@
     <main>
       <div class="current-container">
         <div class="main-info">
-          <img src="images/location.png" id="location" alt="Location" />
-          <h1 id="area"></h1>
-          <img src="images/calendar.png" alt="Date" />
-          <h1 id="date"></h1>
-          <img src="images/clock.png" alt="Time" />
-          <h1 id="time"></h1>
+          <div class="info-group">
+            <img src="images/location.png" id="location" alt="Location" />
+            <h1 id="area"></h1>
+          </div>
+          <div class="info-group">
+            <img src="images/calendar.png" alt="Date" />
+            <h1 id="date"></h1>
+          </div>
+          <div class="info-group">
+            <img src="images/clock.png" alt="Time" />
+            <h1 id="time"></h1>
+          </div>
         </div>
         <div class="current">
-          <!-- <h1 id="current-location">Today</h1> -->
           <h2 id="current-temp"></h2>
           <img id="current-icon" />
           <p id="current-description"></p>
@@ -28,7 +33,8 @@
 
       <div class="quote-container">
         <h1 class="quote">
-          If you weren't prompted to share your location, please go turn on your location services for browsers.
+          If you weren't prompted to share your location, please go turn on your
+          location services for browsers.
         </h1>
         <h2 class="quote-author">-Developer</h2>
       </div>
