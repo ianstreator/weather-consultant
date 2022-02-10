@@ -52,13 +52,14 @@ main {
   position: relative;
   height: 100vh;
   max-height: 100vh;
-  justify-content: space-evenly;
+  justify-content: space-between;
   .current-container {
     display: flex;
     flex-direction: column;
     width: fit-content;
     height: fit-content;
     margin: 1rem;
+    margin-top: 0;
     .main-info {
       display: flex;
       justify-content: space-evenly;
@@ -310,7 +311,7 @@ footer {
   html {
     font-size: 12px;
   }
-  
+
   footer {
     p {
       font-size: 1.5rem;
@@ -373,6 +374,7 @@ footer {
     }
     .forecast-container {
       padding: 2em;
+      margin: 0;
       .forecast-card-container {
         gap: 2em;
         .card {
@@ -425,25 +427,28 @@ footer {
   }
 
   footer {
-    font-size: 12px;
+    font-size: 2rem;
     padding: 4rem;
+    p {
+      font-size: 2rem;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .forecast-container {
+    .forecast-card-container {
+      .card {
+        &:hover {
+          background-image: unset;
+        }
+      }
+    }
   }
 }
 
 @media screen and (max-width: 360px) {
   html {
     font-size: 5px;
-  }
-  footer {
-    p {
-      font-size: 2rem;
-    }
-  }
-  main {
-    .current-container {
-      .main-info {
-        min-width: 305px;
-      }
-    }
   }
 }
