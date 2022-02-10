@@ -30,6 +30,7 @@ body {
   background-color: var(--dark-background-color);
   color: var(--text-color);
   max-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
@@ -51,63 +52,65 @@ main {
   position: relative;
   height: 100vh;
   max-height: 100vh;
-  .main-info {
+  justify-content: space-evenly;
+  .current-container {
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    background-color: rgb(0, 0, 0);
+    flex-direction: column;
+    width: fit-content;
+    height: fit-content;
     margin: 1rem;
-    margin-bottom: 0;
-    text-align: center;
-    padding: 1rem;
-    .info-group {
+    .main-info {
       display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      background-color: rgb(0, 0, 0);
+      margin-bottom: 0;
+      text-align: center;
+      padding: 1rem;
+      .info-group {
+        display: flex;
+        min-width: max-content;
+      }
+      img {
+        margin: 0.5rem;
+        margin-left: 2rem;
+        width: 2rem;
+      }
+      h1 {
+        margin: 0.5rem;
+        margin-right: 2rem;
+        margin-bottom: auto;
+      }
     }
-    img {
-      margin: 0.5rem;
-      margin-left: 2rem;
-      width: 2rem;
-    }
-    h1 {
-      margin: 0.5rem;
-      margin-right: 2rem;
-      margin-bottom: auto;
+
+    .current {
+      background-image: linear-gradient(
+        to bottom,
+        rgb(0, 0, 0),
+        var(--card-color)
+      );
+      height: fit-content;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+      word-wrap: normal;
+      h2 {
+        font-size: 4rem;
+        margin: 1rem;
+      }
+      img {
+        width: 8rem;
+        margin: 1rem;
+      }
+      p {
+        font-size: 2rem;
+        margin: 1rem;
+        text-align: center;
+      }
     }
   }
 
-  .current {
-    background-image: linear-gradient(
-      to bottom,
-      rgb(0, 0, 0),
-      var(--card-color)
-    );
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
-    word-wrap: normal;
-    margin: 1rem;
-    margin-top: 0;
-    h1 {
-      font-size: 2.5rem;
-      margin: 1rem;
-      text-decoration: underline;
-    }
-    h2 {
-      font-size: 5rem;
-      margin: 1rem;
-    }
-    img {
-      width: 10rem;
-      margin: 1rem;
-    }
-    p {
-      font-size: 2.5rem;
-      margin: 1rem;
-      text-align: center;
-    }
-  }
   .quote-container {
     float: right;
     width: 40%;
@@ -128,9 +131,11 @@ main {
       font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
         "Lucida Sans", Arial, sans-serif;
       font-size: 2.75rem;
+      font-weight: lighter;
       margin-bottom: 1rem;
       min-width: 100%;
       max-height: 10rem;
+      padding-right: 1rem;
     }
     .quote-author {
       min-width: fit-content;
@@ -142,8 +147,7 @@ main {
       margin-top: auto;
     }
   }
-
-  .forecast-card-container {
+  .forecast-container {
     background-image: linear-gradient(
       to top,
       rgba(0, 0, 0, 0.85) 10%,
@@ -153,14 +157,17 @@ main {
     width: 100%;
     margin: auto;
     margin-bottom: 0;
-    height: auto;
     padding: 1rem;
     padding-bottom: 2rem;
+  }
+  .forecast-card-container {
+    width: 100%;
+    margin-bottom: 0;
+    height: auto;
     display: flex;
     overflow-x: scroll;
     align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
+    justify-content: space-around;
     &::-webkit-scrollbar {
       display: none;
     }
@@ -172,9 +179,14 @@ main {
       box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
       transition: 800ms;
       transform-style: preserve-3d;
+
       &:hover {
         cursor: pointer;
-        background-color: rgba(255, 255, 255, 0.5);
+        background-image: linear-gradient(
+          to top,
+          rgba(255, 255, 255, 0.5),
+          rgba(255, 255, 255, 0)
+        );
       }
       &.flip {
         transform: rotateY(180deg);
@@ -280,7 +292,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  padding: 2rem;
   p {
     margin: 0.5rem;
     text-align: center;
@@ -298,6 +310,7 @@ footer {
   html {
     font-size: 12px;
   }
+  
   footer {
     p {
       font-size: 1.5rem;
@@ -308,9 +321,15 @@ footer {
   html {
     font-size: 10px;
   }
+  .forecast-container {
+    .forecast-card-container {
+      justify-content: unset;
+      gap: 3rem;
+    }
+  }
 }
 
-@media screen and (max-width: 885px) {
+@media screen and (max-width: 910px) {
   html {
     font-size: 6px;
   }
@@ -318,14 +337,11 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: unset;
     .current-container {
       width: 100%;
+      margin: unset;
       .main-info {
         min-width: fit-content;
-        margin: unset;
-        margin-right: unset;
         padding: 2rem;
         img {
           width: 2.5rem;
@@ -335,8 +351,6 @@ footer {
         }
       }
       .current {
-        margin-right: auto;
-        margin-left: unset;
         box-shadow: 0px 0px 10px 0px black;
         h1 {
           font-size: 3rem;
@@ -357,58 +371,59 @@ footer {
       margin: 2.5rem;
       padding: 2rem;
     }
-    .forecast-card-container {
+    .forecast-container {
       padding: 2em;
-      // padding-top: 14em;
-      margin: unset;
-      margin-top: auto;
-      .card {
-        font-size: 9px;
-        min-width: 14em;
-        height: 22em;
-        margin: 1em;
-        .front {
-          h1 {
-            font-size: 2em;
-            margin: 0.25em;
-          }
-          h2 {
-            font-size: 2.5em;
-            margin: 0.25em;
-          }
-          img {
-            width: 6em;
-            margin: 0.25em;
-          }
-          p {
-            font-size: 2em;
-            width: 6em;
-          }
-        }
-        .back {
-          .sun {
-            margin-top: 2em;
+      .forecast-card-container {
+        gap: 2em;
+        .card {
+          font-size: 9px;
+          min-width: 14em;
+          height: 22em;
+          margin: 1em;
+          .front {
+            h1 {
+              font-size: 2em;
+              margin: 0.25em;
+            }
+            h2 {
+              font-size: 2.5em;
+              margin: 0.25em;
+            }
             img {
-              height: 2.5em;
+              width: 6em;
+              margin: 0.25em;
             }
-            h1 {
-              font-size: 1.5em;
+            p {
+              font-size: 2em;
+              width: 6em;
             }
           }
-          .wind {
-            h1 {
-              font-size: 2.75em;
+          .back {
+            .sun {
+              margin-top: 2em;
+              img {
+                height: 2.5em;
+              }
+              h1 {
+                font-size: 1.5em;
+              }
             }
-            .wind-direction {
-              width: 3.25em;
-              top: 1em;
-              left: 0.25em;
+            .wind {
+              h1 {
+                font-size: 2.75em;
+              }
+              .wind-direction {
+                width: 3.25em;
+                top: 1em;
+                left: 0.25em;
+              }
             }
           }
         }
       }
     }
   }
+
   footer {
     font-size: 12px;
     padding: 4rem;
@@ -432,20 +447,3 @@ footer {
     }
   }
 }
-// @media screen and (max-width: 835px) {
-//   html {
-//     font-size: 6px;
-//   }
-// }
-
-// @media screen and (max-width: 600px) {
-//   html {
-//     font-size: 6px;
-//   }
-// }
-
-// @media screen and (max-width: 375px) {
-//   html {
-//     font-size: 5px;
-//   }
-// }

@@ -31,6 +31,7 @@ body {
   background-color: var(--dark-background-color);
   color: var(--text-color);
   max-height: 100vh;
+  height: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -63,9 +64,29 @@ main {
   position: relative;
   height: 100vh;
   max-height: 100vh;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
 }
 
-main .main-info {
+main .current-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin: 1rem;
+}
+
+main .current-container .main-info {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -76,31 +97,33 @@ main .main-info {
       -ms-flex-align: center;
           align-items: center;
   background-color: black;
-  margin: 1rem;
   margin-bottom: 0;
   text-align: center;
   padding: 1rem;
 }
 
-main .main-info .info-group {
+main .current-container .main-info .info-group {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
 }
 
-main .main-info img {
+main .current-container .main-info img {
   margin: 0.5rem;
   margin-left: 2rem;
   width: 2rem;
 }
 
-main .main-info h1 {
+main .current-container .main-info h1 {
   margin: 0.5rem;
   margin-right: 2rem;
   margin-bottom: auto;
 }
 
-main .current {
+main .current-container .current {
   background-image: -webkit-gradient(linear, left top, left bottom, from(black), to(var(--card-color)));
   background-image: linear-gradient(to bottom, black, var(--card-color));
   height: -webkit-fit-content;
@@ -119,28 +142,20 @@ main .current {
   -webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
           box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
   word-wrap: normal;
-  margin: 1rem;
-  margin-top: 0;
 }
 
-main .current h1 {
-  font-size: 2.5rem;
-  margin: 1rem;
-  text-decoration: underline;
-}
-
-main .current h2 {
-  font-size: 5rem;
+main .current-container .current h2 {
+  font-size: 4rem;
   margin: 1rem;
 }
 
-main .current img {
-  width: 10rem;
+main .current-container .current img {
+  width: 8rem;
   margin: 1rem;
 }
 
-main .current p {
-  font-size: 2.5rem;
+main .current-container .current p {
+  font-size: 2rem;
   margin: 1rem;
   text-align: center;
 }
@@ -173,9 +188,11 @@ main .quote-container .quote {
   color: white;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
   font-size: 2.75rem;
+  font-weight: lighter;
   margin-bottom: 1rem;
   min-width: 100%;
   max-height: 10rem;
+  padding-right: 1rem;
 }
 
 main .quote-container .quote-author {
@@ -189,15 +206,20 @@ main .quote-container .quote-author {
   margin-top: auto;
 }
 
-main .forecast-card-container {
+main .forecast-container {
   background-image: -webkit-gradient(linear, left bottom, left top, color-stop(10%, rgba(0, 0, 0, 0.85)), color-stop(60%, rgba(0, 0, 0, 0.6)), to(rgba(0, 0, 0, 0)));
   background-image: linear-gradient(to top, rgba(0, 0, 0, 0.85) 10%, rgba(0, 0, 0, 0.6) 60%, rgba(0, 0, 0, 0));
   width: 100%;
   margin: auto;
   margin-bottom: 0;
-  height: auto;
   padding: 1rem;
   padding-bottom: 2rem;
+}
+
+main .forecast-card-container {
+  width: 100%;
+  margin-bottom: 0;
+  height: auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -205,10 +227,8 @@ main .forecast-card-container {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  gap: 2rem;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
 
 main .forecast-card-container::-webkit-scrollbar {
@@ -233,7 +253,8 @@ main .forecast-card-container .card {
 
 main .forecast-card-container .card:hover {
   cursor: pointer;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(255, 255, 255, 0.5)), to(rgba(255, 255, 255, 0)));
+  background-image: linear-gradient(to top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
 }
 
 main .forecast-card-container .card.flip {
@@ -384,7 +405,7 @@ footer {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 1rem;
+  padding: 2rem;
 }
 
 footer p {
@@ -414,9 +435,15 @@ footer p a:hover, footer p a:active {
   html {
     font-size: 10px;
   }
+  .forecast-container .forecast-card-container {
+    -webkit-box-pack: unset;
+        -ms-flex-pack: unset;
+            justify-content: unset;
+    gap: 3rem;
+  }
 }
 
-@media screen and (max-width: 885px) {
+@media screen and (max-width: 910px) {
   html {
     font-size: 6px;
   }
@@ -431,20 +458,15 @@ footer p a:hover, footer p a:active {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    padding: unset;
   }
   main .current-container {
     width: 100%;
+    margin: unset;
   }
   main .current-container .main-info {
     min-width: -webkit-fit-content;
     min-width: -moz-fit-content;
     min-width: fit-content;
-    margin: unset;
-    margin-right: unset;
     padding: 2rem;
   }
   main .current-container .main-info img {
@@ -454,8 +476,6 @@ footer p a:hover, footer p a:active {
     font-size: 2.5rem;
   }
   main .current-container .current {
-    margin-right: auto;
-    margin-left: unset;
     -webkit-box-shadow: 0px 0px 10px 0px black;
             box-shadow: 0px 0px 10px 0px black;
   }
@@ -476,46 +496,47 @@ footer p a:hover, footer p a:active {
     margin: 2.5rem;
     padding: 2rem;
   }
-  main .forecast-card-container {
+  main .forecast-container {
     padding: 2em;
-    margin: unset;
-    margin-top: auto;
   }
-  main .forecast-card-container .card {
+  main .forecast-container .forecast-card-container {
+    gap: 2em;
+  }
+  main .forecast-container .forecast-card-container .card {
     font-size: 9px;
     min-width: 14em;
     height: 22em;
     margin: 1em;
   }
-  main .forecast-card-container .card .front h1 {
+  main .forecast-container .forecast-card-container .card .front h1 {
     font-size: 2em;
     margin: 0.25em;
   }
-  main .forecast-card-container .card .front h2 {
+  main .forecast-container .forecast-card-container .card .front h2 {
     font-size: 2.5em;
     margin: 0.25em;
   }
-  main .forecast-card-container .card .front img {
+  main .forecast-container .forecast-card-container .card .front img {
     width: 6em;
     margin: 0.25em;
   }
-  main .forecast-card-container .card .front p {
+  main .forecast-container .forecast-card-container .card .front p {
     font-size: 2em;
     width: 6em;
   }
-  main .forecast-card-container .card .back .sun {
+  main .forecast-container .forecast-card-container .card .back .sun {
     margin-top: 2em;
   }
-  main .forecast-card-container .card .back .sun img {
+  main .forecast-container .forecast-card-container .card .back .sun img {
     height: 2.5em;
   }
-  main .forecast-card-container .card .back .sun h1 {
+  main .forecast-container .forecast-card-container .card .back .sun h1 {
     font-size: 1.5em;
   }
-  main .forecast-card-container .card .back .wind h1 {
+  main .forecast-container .forecast-card-container .card .back .wind h1 {
     font-size: 2.75em;
   }
-  main .forecast-card-container .card .back .wind .wind-direction {
+  main .forecast-container .forecast-card-container .card .back .wind .wind-direction {
     width: 3.25em;
     top: 1em;
     left: 0.25em;
