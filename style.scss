@@ -29,7 +29,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--dark-background-color);
   color: var(--text-color);
-  height: 100vh;
+  max-height: 100vh;
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
@@ -48,15 +48,21 @@ main {
   flex-grow: 1;
   display: flex;
   flex-wrap: wrap;
+  position: relative;
+  height: 100vh;
+  max-height: 100vh;
   .main-info {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     background-color: rgb(0, 0, 0);
     margin: 1rem;
     margin-bottom: 0;
     text-align: center;
     padding: 1rem;
+    .info-group {
+      display: flex;
+    }
     img {
       margin: 0.5rem;
       margin-left: 2rem;
@@ -65,6 +71,7 @@ main {
     h1 {
       margin: 0.5rem;
       margin-right: 2rem;
+      margin-bottom: auto;
     }
   }
 
@@ -103,9 +110,9 @@ main {
   }
   .quote-container {
     float: right;
-    width: 50%;
-    min-width: 30%;
-    height: fit-content;
+    width: 40%;
+    height: auto;
+    max-height: 20rem;
     background-color: var(--card-forecast-color);
     backdrop-filter: blur(8px);
     display: flex;
@@ -120,31 +127,40 @@ main {
       color: white;
       font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
         "Lucida Sans", Arial, sans-serif;
-      font-size: 4rem;
+      font-size: 2.75rem;
       margin-bottom: 1rem;
+      min-width: 100%;
+      max-height: 10rem;
     }
     .quote-author {
+      min-width: fit-content;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
         Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
       font-style: italic;
       font-weight: lighter;
       margin-left: auto;
+      margin-top: auto;
     }
   }
 
   .forecast-card-container {
     background-image: linear-gradient(
       to top,
-      rgba(0, 0, 0, 0.85)10%,
-      rgba(0,0,0,0.6)60%,
+      rgba(0, 0, 0, 0.85) 10%,
+      rgba(0, 0, 0, 0.6) 60%,
       rgba(0, 0, 0, 0)
     );
     width: 100%;
+    margin: auto;
+    margin-bottom: 0;
     height: auto;
+    padding: 1rem;
+    padding-bottom: 2rem;
     display: flex;
     overflow-x: scroll;
     align-items: center;
-    justify-content: start;
+    justify-content: space-between;
+    gap: 2rem;
     &::-webkit-scrollbar {
       display: none;
     }
@@ -152,13 +168,13 @@ main {
       user-select: none;
       min-width: 14rem;
       height: 22rem;
-      margin: 2.5rem;
       border-radius: 5px;
       box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
       transition: 800ms;
       transform-style: preserve-3d;
       &:hover {
         cursor: pointer;
+        background-color: rgba(255, 255, 255, 0.25);
       }
       &.flip {
         transform: rotateY(180deg);
@@ -191,7 +207,7 @@ main {
           display: flex;
           flex-direction: column;
           img {
-            margin-bottom: .5rem;
+            margin-bottom: 0.5rem;
             height: 2.5rem;
           }
           h1 {
@@ -213,8 +229,8 @@ main {
           .wind-direction {
             position: absolute;
             width: 3.25rem;
-            top: .5rem;
-            left: .1rem;
+            top: 0.5rem;
+            left: 0.1rem;
           }
         }
       }
@@ -240,7 +256,7 @@ main {
           margin: 0.25rem;
         }
         img {
-          width: 8rem;
+          width: 6.5rem;
           margin: 0.25rem;
         }
         p {
@@ -283,7 +299,6 @@ footer {
     font-size: 12px;
   }
   footer {
-    padding-bottom: 3rem;
     p {
       font-size: 1.5rem;
     }
@@ -295,9 +310,9 @@ footer {
   }
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 885px) {
   html {
-    font-size: 9px;
+    font-size: 6px;
   }
   main {
     display: flex;
@@ -314,9 +329,6 @@ footer {
         padding: 2rem;
         img {
           width: 2.5rem;
-          &#location {
-            width: 2.1rem;
-          }
         }
         h1 {
           font-size: 2.5rem;
@@ -346,10 +358,13 @@ footer {
       padding: 2rem;
     }
     .forecast-card-container {
+      padding: 2em;
+      padding-top: 14em;
       .card {
         font-size: 9px;
         min-width: 14em;
         height: 22em;
+        margin: 1em;
         .front {
           h1 {
             font-size: 2em;
@@ -390,7 +405,6 @@ footer {
           }
         }
       }
-      margin-top: auto;
     }
   }
   footer {
@@ -398,20 +412,38 @@ footer {
     padding: 4rem;
   }
 }
-@media screen and (max-width: 835px) {
-  html {
-    font-size: 7px;
-  }
-}
 
-@media screen and (max-width: 600px) {
-  html {
-    font-size: 6px;
-  }
-}
-
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 360px) {
   html {
     font-size: 5px;
   }
+  footer {
+    p {
+      font-size: 2rem;
+    }
+  }
+  main {
+    .current-container {
+      .main-info {
+        min-width: 305px;
+      }
+    }
+  }
 }
+// @media screen and (max-width: 835px) {
+//   html {
+//     font-size: 6px;
+//   }
+// }
+
+// @media screen and (max-width: 600px) {
+//   html {
+//     font-size: 6px;
+//   }
+// }
+
+// @media screen and (max-width: 375px) {
+//   html {
+//     font-size: 5px;
+//   }
+// }
