@@ -1,6 +1,10 @@
 import "./style.css";
 import images from "./images/images.js";
 
+console.log(window.innerWidth)
+console.log(window.innerHeight)
+
+
 const currentTemp = document.getElementById("current-temp");
 const currentIcon = document.getElementById("current-icon");
 const currentDescription = document.getElementById("current-description");
@@ -97,7 +101,7 @@ function createForecastCards(
   card.append(cardBack, cardFront);
   forecastContainer.append(card);
 
-  card.addEventListener("click", () => {
+  card.addEventListener("mouseenter", () => {
     card.classList.contains("flip")
       ? card.classList.remove("flip")
       : card.classList.add("flip");
