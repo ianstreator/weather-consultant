@@ -1,9 +1,9 @@
 import "./style.css";
 import images from "./images/images.js";
+import { doc } from "prettier";
 
-console.log(window.innerWidth)
-console.log(window.innerHeight)
-
+console.log(window.innerWidth);
+console.log(window.innerHeight);
 
 const currentTemp = document.getElementById("current-temp");
 const currentIcon = document.getElementById("current-icon");
@@ -14,6 +14,8 @@ const title = document.querySelector("title");
 const faviconLink = document.querySelector("link");
 const clock = document.getElementById("time");
 const area = document.getElementById("area");
+const Quote = document.getElementById("quote");
+const QuoteAuthor = document.getElementById("quote-author");
 
 function appendDataToCurrentCard(weatherData, icon) {
   currentTemp.append(weatherData.temp);
@@ -90,7 +92,8 @@ function createForecastCards(
   windDIR.src = `${images.forecastCardBackIcons.winddir}`;
   const speed = document.createElement("h1");
   speed.textContent = `${windSpeed}`;
-  if (windSpeed.toString().length < 2) speed.style.cssText = "margin-left:1.5rem"
+  if (windSpeed.toString().length < 2)
+    speed.style.cssText = "margin-left:1.5rem";
   wind.append(speed, windIMG, windDIR);
   wind.classList.add("wind");
 
@@ -122,9 +125,9 @@ const time = (the) => {
   let date = new Date();
   let hours = date.getHours();
   let minutes = date.getMinutes();
-  
+
   if (the !== undefined) {
-    console.log(the)
+    console.log(the);
     date = new Date(the);
     hours = date.getHours(the);
     minutes = date.getMinutes(the);
@@ -132,7 +135,7 @@ const time = (the) => {
     if (hours > 12) hours = hours - 12;
     else if (hours === 0) hours = 12;
     const time = `${hours}:${minutes}`;
-    return {time};
+    return { time };
   }
 
   const am_pm = hours < 12 ? "AM" : "PM";
@@ -182,11 +185,17 @@ setInterval(() => {
       body: JSON.stringify(location),
     };
     const res = await fetch(`${BASE_URL}/forecast`, options);
-    let { city, json, background } = await res.json();
+    let { city, json, background, quote } = await res.json();
     console.log(json);
     console.log(city);
     console.log(background);
-    console.log(Date(json.current.dt))
+    console.log(quote);
+    console.log(Date(json.current.dt));
+
+    //...setting quote....
+    
+    Quote.innerHTML = quote[0];
+    QuoteAuthor.innerHTML = `-${quote[1]}`;
 
     //....setting website background image........
     if (background === "defaults") {
@@ -222,7 +231,6 @@ setInterval(() => {
       const tempLow = `L: ${Math.floor(e.temp.min)}°`;
       const sunRise = e.sunrise * 1000;
       const sunSet = e.sunset * 1000;
-
 
       createForecastCards(
         day,
