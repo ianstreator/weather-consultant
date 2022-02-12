@@ -519,6 +519,7 @@ footer p a:hover, footer p a:active {
     font-size: 9px;
     min-width: 14em;
     height: 22em;
+    margin: 3em;
   }
   main .forecast-container .forecast-card-container .card .front h1 {
     font-size: 2em;
