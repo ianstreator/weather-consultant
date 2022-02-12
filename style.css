@@ -534,7 +534,8 @@ footer p a:hover, footer p a:active {
   }
   main .forecast-container .forecast-card-container {
     gap: 5em;
-    padding: 4rem;
+    padding: unset;
+    padding-bottom: 2em;
   }
   main .forecast-container .forecast-card-container .card {
     font-size: 9px;

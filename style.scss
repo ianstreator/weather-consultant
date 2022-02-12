@@ -25,8 +25,8 @@ html {
   height: 100vh;
   max-height: 100vh;
   height: -webkit-fill-available;
-
 }
+
 body {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -390,7 +390,8 @@ footer {
       align-content: center;
       .forecast-card-container {
         gap: 5em;
-        padding: 4rem;
+        padding: unset;
+        padding-bottom: 2em;
         .card {
           font-size: 9px;
           min-width: 14em;

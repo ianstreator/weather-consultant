@@ -15,7 +15,7 @@ function getRandomInt(min, max) {
 }
 function randomQuoteInt() {
   const quoteNumber = getRandomInt(0, 24)
-  console.log(quoteNumber, 'quote')
+  // console.log(quoteNumber, 'quote')
   return quoteNumber
 }
 
@@ -93,6 +93,8 @@ async function checkCache(
       cache.quote[i] = [quote, author]
       body["quote"] = cache.quote[getRandomInt(0,59)]
     })
+    console.log(body)
+
   } else {
     console.log("using cache for quote");
   }
@@ -107,7 +109,7 @@ async function checkCache(
   } else {
     console.log("using cache for weather");
   }
-  console.log(cache);
+  // console.log(cache);
 }
 
 const WEATHER_API_BASE_URL = "http://api.openweathermap.org/";

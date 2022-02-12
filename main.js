@@ -1,9 +1,5 @@
 import "./style.css";
 import images from "./images/images.js";
-import { doc } from "prettier";
-
-console.log(window.innerWidth);
-console.log(window.innerHeight);
 
 const currentTemp = document.getElementById("current-temp");
 const currentIcon = document.getElementById("current-icon");
@@ -127,7 +123,6 @@ const time = (the) => {
   let minutes = date.getMinutes();
 
   if (the !== undefined) {
-    console.log(the);
     date = new Date(the);
     hours = date.getHours(the);
     minutes = date.getMinutes(the);
