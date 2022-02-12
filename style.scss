@@ -22,6 +22,10 @@
 }
 html {
   font-size: 14px;
+  height: 100vh;
+  max-height: 100vh;
+  height: -webkit-fill-available;
+
 }
 body {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -31,6 +35,7 @@ body {
   color: var(--text-color);
   max-height: 100vh;
   height: 100vh;
+  height: -webkit-fill-available;
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
@@ -385,10 +390,13 @@ footer {
       align-content: center;
       .forecast-card-container {
         gap: 5em;
+        padding: 4rem;
         .card {
           font-size: 9px;
           min-width: 14em;
           height: 22em;
+          margin: unset;
+          box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.75);
           .front {
             h1 {
               font-size: 2em;
@@ -420,7 +428,7 @@ footer {
             .wind {
               h1 {
                 font-size: 2.5em;
-                margin-left: .1em;
+                margin-left: 0.1em;
               }
               .wind-direction {
                 width: 3.25em;
