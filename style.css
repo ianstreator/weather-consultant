@@ -452,8 +452,9 @@ footer p a:hover, footer p a:active {
     font-size: 6px;
   }
   main {
-    -ms-flex-negative: 1rem;
-        flex-shrink: 1rem;
+    -webkit-box-flex: unset;
+        -ms-flex-positive: unset;
+            flex-grow: unset;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -511,6 +512,13 @@ footer p a:hover, footer p a:active {
     margin: 0;
     position: absolute;
     bottom: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
@@ -522,9 +530,6 @@ footer p a:hover, footer p a:active {
   }
   main .forecast-container .forecast-card-container {
     gap: 5em;
-    -webkit-box-pack: unset;
-        -ms-flex-pack: unset;
-            justify-content: unset;
   }
   main .forecast-container .forecast-card-container .card {
     font-size: 9px;
