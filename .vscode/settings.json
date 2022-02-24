@@ -2,6 +2,6 @@
     "liveServer.settings.port": 5501,
     "editor.tokenColorCustomizations": {
 
-        "comments": "#d87cc9"
+        "comments": "#00ff15"
     },
 }
