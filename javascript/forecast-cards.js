@@ -1,5 +1,5 @@
 const forecastContainer = document.getElementById("forecast-container");
-import images from "./images/images.js";
+import images from "../images/images.js";
 import dateAndTime from "./date-and-time.js";
 
 function createForecastCards(

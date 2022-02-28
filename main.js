@@ -1,9 +1,9 @@
 import "./style.css";
 import images from "./images/images.js";
-import currentCard from "./current-card";
-import forecastCards from "./forecast-cards";
-import dateAndTime from "./date-and-time";
-import geoLocator from "./geo-locator";
+import currentCard from "./javascript/current-card";
+import forecastCards from "./javascript/forecast-cards";
+import dateAndTime from "./javascript/date-and-time";
+import geoLocator from "./javascript/geo-locator";
 
 const body = document.querySelector("body");
 const title = document.querySelector("title");
